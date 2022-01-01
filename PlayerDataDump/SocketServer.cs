@@ -53,7 +53,7 @@ namespace PlayerDataDump
             switch (e.Data)
             {
                 case "mods":
-                    Send(JsonUtility.ToJson(ModHooks.Instance.LoadedModsWithVersions));
+                    Send(JsonUtility.ToJson(ModHooks.LoadedModsWithVersions));
                     break;
                 case "version":
                     Send($"{{ \"version\":\"{PlayerDataDump.Instance.GetVersion()}\" }}");
@@ -101,12 +101,12 @@ namespace PlayerDataDump
         {
             base.OnClose(e);
             
-            ModHooks.Instance.NewGameHook -= NewGame;
-            ModHooks.Instance.AfterSavegameLoadHook -= LoadSave;
-            ModHooks.Instance.SetPlayerBoolHook -= EchoBool;
-            ModHooks.Instance.SetPlayerIntHook -= EchoInt;
+            ModHooks.NewGameHook -= NewGame;
+            ModHooks.AfterSavegameLoadHook -= LoadSave;
+            ModHooks.SetPlayerBoolHook -= EchoBool;
+            ModHooks.SetPlayerIntHook -= EchoInt;
             On.GameMap.Start -= gameMapStart;
-            ModHooks.Instance.ApplicationQuitHook -= OnQuit;
+            ModHooks.ApplicationQuitHook -= OnQuit;
             randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = false;
             PlayerDataDump.Instance.Log("CLOSE: Code:" + e.Code + ", Reason:" + e.Reason);
         }
@@ -139,7 +139,7 @@ namespace PlayerDataDump
             SendMessage("SaveLoaded", "true");
         }
 
-        public void EchoBool(string var, bool value)
+        public bool EchoBool(string var, bool value)
         {
             PlayerDataDump.Instance.LogDebug($"EchoBool: {var} = {value}");
             if (var == "atBench" && value && !randoAtBench)
@@ -188,15 +188,15 @@ namespace PlayerDataDump
                 SendMessage(var, value.ToString());
             }
 
-            PlayerData.instance.SetBoolInternal(var, value);
             if (RandomizerMod.RandomizerMod.Instance.Settings.CursedNail) getCursedNail();
             if (RandomizerMod.RandomizerMod.Instance.Settings.RandomizeSwim) getSwim();
             if (RandomizerMod.RandomizerMod.Instance.Settings.ElevatorPass) getElevatorPass();
             if (RandomizerMod.RandomizerMod.Instance.Settings.DuplicateMajorItems) getDreamer();
             if (RandomizerMod.RandomizerMod.Instance.Settings.RandomizeFocus) getFocus();
+            return value;
         }
 
-       public void EchoInt(string var, int value)
+       public int EchoInt(string var, int value)
         {
             PlayerDataDump.Instance.LogDebug($"EchoInt: {var} = {value}");
             if ( var == "royalCharmState" && (value == 1 || value == 2 || value == 3 || value == 4 ))
@@ -207,7 +207,7 @@ namespace PlayerDataDump
             {
                 SendMessage(var, value.ToString());
             }
-            PlayerData.instance.SetIntInternal(var, value);
+            return value;
         }
 
         public string GetJson()

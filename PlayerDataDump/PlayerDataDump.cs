@@ -21,14 +21,6 @@ namespace PlayerDataDump
         /// <summary>
         /// Fetches the list of the current mods installed.
         /// </summary>
-        public static string GetCurrentMods()
-        {
-            List<string> mods = ModHooks.Instance.LoadedMods;
-            string output = mods.Aggregate("[", (current, mod) => current + $"\"{mod}\",");
-            output = output.TrimEnd(',') + "]";
-            return output;
-        }
-        public override bool IsCurrent() {return true;}
         public override string GetVersion() => FileVersionInfo.GetVersionInfo(Assembly.GetAssembly(typeof(PlayerDataDump)).Location).FileVersion;
         /// <summary>
         /// Creates and starts the WebSocket Server instances.
@@ -41,12 +33,12 @@ namespace PlayerDataDump
             //Setup websockets server
             _wss.AddWebSocketService<SocketServer>("/playerData", ss =>
             {
-                ModHooks.Instance.NewGameHook += ss.NewGame;
-                ModHooks.Instance.AfterSavegameLoadHook += ss.LoadSave;
+                ModHooks.NewGameHook += ss.NewGame;
+                ModHooks.AfterSavegameLoadHook += ss.LoadSave;
                 On.GameMap.Start += ss.gameMapStart;
-                ModHooks.Instance.SetPlayerBoolHook += ss.EchoBool;
-                ModHooks.Instance.SetPlayerIntHook += ss.EchoInt;
-                ModHooks.Instance.ApplicationQuitHook += ss.OnQuit;
+                ModHooks.SetPlayerBoolHook += ss.EchoBool;
+                ModHooks.SetPlayerIntHook += ss.EchoInt;
+                ModHooks.ApplicationQuitHook += ss.OnQuit;
             });
             
             //Setup ProfileStorage Server
