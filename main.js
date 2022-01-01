@@ -49,7 +49,7 @@ $( document ).ready(function() {
 	
 	  var makeNew = getParameterByName("makeNew");
 		
-	  var regexReplaceUrl = new RegExp(/^(file:\/\/.*Index.html)/);
+	  var regexReplaceUrl = new RegExp(/^(file:\/\/.*index.html)/);
 
 	  
 	  
@@ -273,7 +273,7 @@ $( document ).ready(function() {
 				  $('#urlText').val(window.location.href.replace(/\?.*/,"") + "?profile=" + profileId + ( overrideUrl != undefined ? "&url=" + overrideUrl : "") );
 				  var config = LZString.compressToEncodedURIComponent(JSON.stringify(map));
 
-                  toTiny("https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Index.html?config=" + config, FirebaseApiKey, function(value){
+                  toTiny("https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/index.html?config=" + config, FirebaseApiKey, function(value){
                       $('#tinyUrlText').val(value);
 				  })
 				  
@@ -1152,7 +1152,7 @@ $( document ).ready(function() {
 		  console.log("Updating url string");
 	  
 		  urlParams["profile"] = profileId;
-		  window.history.pushState(profileId, "", "Index.html?" + $.param(urlParams) );
+		  window.history.pushState(profileId, "", "index.html?" + $.param(urlParams) );
 
 		  if (map != undefined && wsprofile.readyState === wsprofile.OPEN)
 		  	wsprofile.send("save|" + profileId + "|" + btoa(JSON.stringify(map, null, 2).replace("==", "%3D%3D")));
