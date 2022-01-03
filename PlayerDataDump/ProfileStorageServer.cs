@@ -29,7 +29,7 @@ namespace PlayerDataDump
                 {
                     Send(profileId + "|" + GetProfile(profileId));
                 }
-            }else if (e.Data.StartsWith("save"))
+            } else if (e.Data.StartsWith("save"))
             {
                 string[] temp = e.Data.Split('|');
                 if (int.TryParse(temp[1], out int profileId))
@@ -37,7 +37,7 @@ namespace PlayerDataDump
                     SaveProfile(profileId, temp[2]);
                     Broadcast(profileId + "|" + GetProfile(profileId));
                 }
-            }else
+            } else
             {
                 Send("load|int,save|int|{data}");
             }
@@ -67,7 +67,7 @@ namespace PlayerDataDump
 
         protected override void OnError(WebSocketSharp.ErrorEventArgs e)
         {
-            PlayerDataDump.Instance.LogError("[ProfileStorage]:" + e.Message); 
+            PlayerDataDump.Instance.LogError("[ProfileStorage]:" + e.Message);
             PlayerDataDump.Instance.LogError("[ProfileStorage]:" + e.Exception);
         }
 
@@ -81,6 +81,17 @@ namespace PlayerDataDump
         protected override void OnOpen()
         {
             PlayerDataDump.Instance.Log("[ProfileStorage] OPEN");
+        }
+
+        public void OnStyleEvent()
+        {
+            PlayerDataDump.Instance.Log("sending: " + "Style|" + PlayerDataDump.GS.TrackerStyle);
+            Send("Style|" + PlayerDataDump.GS.TrackerStyle);
+        }
+        public void OnPresetEvent()
+        {
+            PlayerDataDump.Instance.Log("sending: " + "Preset|" + PlayerDataDump.GS.TrackerProfile);
+            Send("Preset|" + PlayerDataDump.GS.TrackerProfile);
         }
     }
 }

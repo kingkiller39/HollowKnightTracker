@@ -657,7 +657,8 @@ function getEntities() {
 }
 function getDefault() {
 	return {
-		"settings" : {
+		"settings": {
+			"Style": "Classic",
 			"hasItemColor": "#07ff6e",
 			"version":1.0
 		},
@@ -731,7 +732,7 @@ function getDefault() {
 		"containers" : {
 			"charms": {
 				"itemsPerRow": 9,
-				"scale" : 40,
+				"scale" : 50,
 				"width" : 510,
 				"height" : 310,
 				"left": 0,

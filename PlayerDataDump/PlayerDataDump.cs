@@ -4,6 +4,7 @@ using System.Diagnostics;
 using System.Linq;
 using Modding;
 using WebSocketSharp.Server;
+using WebSocketSharp;
 using System.Reflection;
 
 namespace PlayerDataDump
@@ -12,11 +13,17 @@ namespace PlayerDataDump
     /// <summary>
     /// Main mod class for PlayerDataDump.  Provides the server and version handling.
     /// </summary>
-    public class PlayerDataDump : Mod, ITogglableMod
+    public class PlayerDataDump : Mod, IMenuMod, IGlobalSettings<GlobalSettings>
     {
+        public static GlobalSettings GS = new GlobalSettings();
+        public GlobalSettings OnSaveGlobal() => GS;
+        public void OnLoadGlobal(GlobalSettings s) => GS = s;
         public override int LoadPriority() => 9999;
         private readonly WebSocketServer _wss = new WebSocketServer(11420);
+        ProfileStorageServer temp = new ProfileStorageServer();
+        string[] StyleValues = new string[] { "Classic", "Modern" };
         internal static PlayerDataDump Instance;
+        public bool ToggleButtonInsideMenu => true;
 
         /// <summary>
         /// Fetches the list of the current mods installed.
@@ -42,10 +49,43 @@ namespace PlayerDataDump
             });
             
             //Setup ProfileStorage Server
-            _wss.AddWebSocketService<ProfileStorageServer>("/ProfileStorage", ss => { });
-
+            _wss.AddWebSocketService<ProfileStorageServer>("/ProfileStorage", ss => {
+                GlobalSettings.StyleEvent += ss.OnStyleEvent;
+                GlobalSettings.PresetEvent += ss.OnPresetEvent;
+            });
+            
             _wss.Start();
             Log("Initialized PlayerDataDump");
+        }
+        public List<IMenuMod.MenuEntry> GetMenuData(IMenuMod.MenuEntry? toggleButtonEntry)
+        {
+            return new List<IMenuMod.MenuEntry>
+            {
+                new IMenuMod.MenuEntry
+                {
+                    Name = "Style",
+                    Description = null,
+                    Values = StyleValues,
+                    Saver = opt => GS.TrackerStyle = (GlobalSettings.Style)opt,
+                    Loader = () => (int)GS.TrackerStyle
+        },
+                new IMenuMod.MenuEntry
+                {
+                    Name = "Presets",
+                    Description = "This does nothing (For now)",
+                    Values = new string []
+                    {
+                        "Player Custom 1",
+                        "Player Custom 2",
+                        "Player Custom 3",
+                        "Default",
+                        "Race"
+                    },
+                    
+                    Saver = opt => GS.TrackerProfile = (GlobalSettings.Profile)opt,
+                    Loader = () => (int)GS.TrackerProfile
+                }
+            };
         }
 
         /// <summary>

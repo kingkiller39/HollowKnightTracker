@@ -18,6 +18,7 @@ $( document ).ready(function() {
 
 	  var currentId;
 	  var urlParams;
+	  var style;
 	  
 	  (window.onpopstate = function () {
 		  var match,
@@ -415,6 +416,16 @@ $( document ).ready(function() {
 				  }
 			  });
 
+			  $('#Style div').on('click', function (e) {
+				  style = $(e.target).attr('id');
+				  console.log(style);
+				  $('#Style div').css("color", "#FFFFFF");
+				  $(e.target).css("color", "#00FF00");
+				  map.settings["Style"] = style;
+				  document.getElementById("pagestyle").setAttribute("href", style + ".css");
+				  updateUrlConfig();
+			  });
+
 		  }
 	  
 		  loadDivs();
@@ -431,7 +442,15 @@ $( document ).ready(function() {
 		  $('.container,.misc-container').remove();
 
 		  if (map == undefined)
-		  return;
+			  return;
+		  if (map.settings["Style"] != undefined) {
+			  document.getElementById("pagestyle").setAttribute("href", map.settings["Style"] + ".css");
+			  $('#' + map.settings["Style"]).css("color", "#00FF00");
+		  }
+		  else {
+			  document.getElementById("pagestyle").setAttribute("href", "Classic.css");
+			  $('#Classic').css("color", "#00FF00");
+          }
 		  $.each(map.containers, function(i, container) {
 			  if (!isEditing && i == "disabled")
 				  return;
@@ -671,6 +690,7 @@ $( document ).ready(function() {
 	  function loadSettings(id) {
 		  currentId = id;
 		  var container = map.containers[id];
+		  $('#conatinerSettingName').text(currentId || "unknown")
 		  if ("scale" in container) 
 			  $('#scale').val(container.scale);
 		  
@@ -687,6 +707,7 @@ $( document ).ready(function() {
 	  function loadMiscSettings(id) {
 		  currentId = id;
 		  var container = map.misc_containers[id];
+		  $('#miscSettingName').text(currentId || "unknown")
 		  if ("color" in container) 
 			  $('#miscFontColor').val(container.color);
 		  
@@ -798,7 +819,16 @@ $( document ).ready(function() {
 				  	return;
 
 				  if (profileId != temp[0])
-					  return;
+					  if (temp[0] == "Style") {
+						  map.settings["Style"] = temp[1];
+						  style = temp[1];
+						  $('#Style div').css("color", "#FFFFFF");
+						  $('#' + temp[1]).css("color", "#00FF00");
+						  document.getElementById("pagestyle").setAttribute("href", style + ".css");
+						  updateUrlConfig();
+						  return;
+                      }
+					  else return;
 
 				  console.log("Profile ID matches, updating screen");
 
