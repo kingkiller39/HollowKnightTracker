@@ -23,8 +23,8 @@ namespace PlayerDataDump
             Default,
             Race
         }
-        private Style _TrackerStyle = Style.Classic;
-        private Profile _TrackerProfile = Profile.PlayerCustom1;
+        public Style _TrackerStyle = Style.Classic;
+        public Profile _TrackerProfile = Profile.PlayerCustom1;
         public Style TrackerStyle
         {
             get
@@ -55,5 +55,7 @@ namespace PlayerDataDump
                 }
             }
         }
+        
+
     }
 }

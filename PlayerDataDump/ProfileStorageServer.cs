@@ -37,7 +37,15 @@ namespace PlayerDataDump
                     SaveProfile(profileId, temp[2]);
                     Broadcast(profileId + "|" + GetProfile(profileId));
                 }
-            } else
+            } else if (e.Data.StartsWith("OBSGetPreset"))
+            {
+                OnPresetEvent();
+                
+            } else if (e.Data.StartsWith("OBSGetStyle"))
+            {
+                OnStyleEvent();
+            }
+            else
             {
                 Send("load|int,save|int|{data}");
             }

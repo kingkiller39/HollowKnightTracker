@@ -72,7 +72,7 @@ namespace PlayerDataDump
                 new IMenuMod.MenuEntry
                 {
                     Name = "Presets",
-                    Description = "This does nothing (For now)",
+                    Description = "Only works with OBS and browser source set to kingkiller39.github.io/HollowKnightRandomizerTracker2.8",
                     Values = new string []
                     {
                         "Player Custom 1",
