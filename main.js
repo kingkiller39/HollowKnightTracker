@@ -1341,11 +1341,8 @@ $(document).ready(function () {
     }
 
     function BorderGlowModern() {
-        if (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
-            return true;
-        } else {
-            return false;
-        }
+        console.log("BorderGlowModer: " + (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css"));
+        return (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css");
     }
 
     function getSubSortKeys(list) {
