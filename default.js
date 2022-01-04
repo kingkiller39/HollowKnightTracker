@@ -632,8 +632,7 @@ function getEntities() {
 			"sprite": "ElevatorPass.png",
 			"enabled": true,
 			"name": "Elevator Pass",
-			"type": "item",
-			"multiple": false
+			"type": "item"
 		},
 		"swim": {
 			"sprite": "Swim.png",
