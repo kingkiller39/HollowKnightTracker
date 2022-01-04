@@ -1005,7 +1005,6 @@ $(document).ready(function () {
                 var img = $(id);
 
                 if (name in data) {
-                    //if (name == "openedWaterwaysManhole" || name == "bathHouseOpened" || name == "jijiDoorUnlocked" || name == )
                     switch (item.type) {
                         case "charm":
                             if (name == "gotCharm_36") // Kingsoul / Void Heart is special
@@ -1304,7 +1303,7 @@ $(document).ready(function () {
                 map.settings.borderColourObtain = "#ffffff";
                 map.settings.borderColourGave = "#FF0000";
             }
-            $(".itemDiv > img").css("filter", "grayscale(1) brightness(.5)");
+            //$(".itemDiv > img").css("filter", "grayscale(1) brightness(.5)");
             $(".itemDiv > .multiple").css("filter", "");
             $(".selected").css("filter", "drop-shadow(0px 0px 5px #07ff6e)");
             $(".selected").css("filter", "drop-shadow(0px 0px 5px " + map.settings.borderColourEquip + ")");
