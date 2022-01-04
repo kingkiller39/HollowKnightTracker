@@ -884,6 +884,7 @@ $(document).ready(function () {
         $(".selected").removeClass("selected");
         $(".equipped").removeClass("equipped");
         $(".multiple").removeClass("multiple");
+        $(".gaveItem").removeClass("gaveItem");
         hasAppliedDS = false;
         hasAppliedUS = false;
         hasAppliedLS = false;
