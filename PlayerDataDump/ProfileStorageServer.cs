@@ -9,9 +9,11 @@ namespace PlayerDataDump
 {
     internal class ProfileStorageServer : WebSocketBehavior
     {
+        private bool isUsingOBS { get; set; }
         public ProfileStorageServer()
         {
             IgnoreExtensions = true;
+            isUsingOBS = false;
         }
         public void Broadcast(string s)
         {
@@ -82,7 +84,8 @@ namespace PlayerDataDump
         protected override void OnClose(CloseEventArgs e)
         {
             base.OnClose(e);
-
+            GlobalSettings.StyleEvent -= OnStyleEvent;
+            GlobalSettings.PresetEvent -= OnPresetEvent;
             PlayerDataDump.Instance.Log("[ProfileStorage] CLOSE: Code:" + e.Code + ", Reason:" + e.Reason);
         }
 

@@ -8,6 +8,7 @@ var hasAppliedDS = false;
 var hasAppliedUS = false;
 var hasAppliedLS = false;
 var hasAppliedRS = false;
+var OBSProfile;
 $(document).ready(function () {
     /*
       var map;	
@@ -825,7 +826,7 @@ $(document).ready(function () {
                 if (temp[1] == "undefined")
                     return;
 
-                if (profileId != temp[0])
+                if (profileId != temp[0]) {
                     if (temp[0] == "Style") {
                         map.settings["Style"] = temp[1];
                         style = temp[1];
@@ -836,7 +837,7 @@ $(document).ready(function () {
                         return;
                     } else if (temp[0] == "Preset" && jQuery.isEmptyObject(urlParams)) {
                         if (temp[1].startsWith("PlayerCustom")) {
-                            profileId = temp[1].charAt(temp[1].length - 1);
+                            OBSProfile = temp[1].charAt(temp[1].length - 1);
                             wsprofile.send("load|" + profileId);
                             return;
                         } else if (temp[0] == "Default") {
@@ -845,15 +846,17 @@ $(document).ready(function () {
                             //todo load default premade profile
                         } else return;
                     } else return;
+                } else if (profileId == temp[0] || OBSProfile == temp[0]) {
+                    console.log("Profile ID matches, updating screen");
 
-                console.log("Profile ID matches, updating screen");
-
-                map = JSON.parse(atob(temp[1]));
-                loadDivs();
-                updatePlayerData();
-                if (usingOBS && jQuery.isEmptyObject(urlParams)) {
-                    wsprofile.send("OBSGetStyle");
+                    map = JSON.parse(atob(temp[1]));
+                    loadDivs();
+                    updatePlayerData();
+                    if (usingOBS && jQuery.isEmptyObject(urlParams)) {
+                        wsprofile.send("OBSGetStyle");
+                    }
                 }
+
             }
             wsprofile.onclose = function () {
                 // Try to reconnect in 5 seconds
