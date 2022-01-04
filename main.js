@@ -883,6 +883,7 @@ $(document).ready(function () {
         console.log("Refreshing data");
         $(".selected").removeClass("selected");
         $(".equipped").removeClass("equipped");
+        $(".multiple").removeClass("multiple");
         hasAppliedDS = false;
         hasAppliedUS = false;
         hasAppliedLS = false;
