@@ -838,7 +838,7 @@ $(document).ready(function () {
                     } else if (temp[0] == "Preset" && jQuery.isEmptyObject(urlParams)) {
                         if (temp[1].startsWith("PlayerCustom")) {
                             OBSProfile = temp[1].charAt(temp[1].length - 1);
-                            wsprofile.send("load|" + profileId);
+                            wsprofile.send("load|" + OBSProfile);
                             return;
                         } else if (temp[0] == "Default") {
                             console.log("Default");
