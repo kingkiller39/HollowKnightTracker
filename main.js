@@ -8,7 +8,7 @@ var hasAppliedDS = false;
 var hasAppliedUS = false;
 var hasAppliedLS = false;
 var hasAppliedRS = false;
-var OBSProfile;
+var OBSProfile = 999;
 var urlParams;
 $(document).ready(function () {
     /*
@@ -827,7 +827,7 @@ $(document).ready(function () {
                 if (temp[1] == "undefined")
                     return;
 
-                if (profileId != temp[0]) {
+                if (profileId != temp[0] && OBSProfile != temp[0]) {
                     if (temp[0] == "Style") {
                         map.settings["Style"] = temp[1];
                         style = temp[1];
