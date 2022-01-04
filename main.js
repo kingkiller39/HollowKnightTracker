@@ -1085,19 +1085,33 @@ $(document).ready(function () {
                                 break;
                             }
                             else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) { //can dash left
-                                $(id).removeClass("container");
-                                $(id).addClass("LeftItem"); //Not sure this works
+                                if (BorderGlowModern()) {
+                                    $(id).css("filter", "drop-shadow(-5px 0px 0px #07ff6e)");
+                                    $(id).css("filter", "drop-shadow(-5px 0px 0px " + map.settings.borderColourEquip + ")");
+                                } else {
+                                    $(id).removeClass("container");
+                                    $(id).addClass("LeftItem");
+                                }
                                 break;
                             }
                             else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) { //can dash right
-                                $(id).removeClass("container");
-                                $(id).addClass("RightItem");
+                                if (BorderGlowModern()) {
+                                    $(id).css("filter", "drop-shadow(5px 0px 0px #07ff6e)");
+                                    $(id).css("filter", "drop-shadow(5px 0px 0px " + map.settings.borderColourEquip + ")");
+                                } else {
+                                    $(id).removeClass("container");
+                                    $(id).addClass("RightItem");
+                                }
                                 break;
                             }
                             else if (name == "hasDash" && data["canDashLeft"] && data["canDashRight"]) { //can dash left and right
-                                $(id).removeClass("LeftItem");
-                                $(id).removeClass("RightItem");
-                                $(id).addClass("container");
+                                if (BorderGlowModern()) {
+                                    $(id).css("filter", "");
+                                } else {
+                                    $(id).removeClass("LeftItem");
+                                    $(id).removeClass("RightItem");
+                                    $(id).addClass("container");
+                                }
                                 setSelected(data[name], id);
                                 break;
                             }
@@ -1107,19 +1121,33 @@ $(document).ready(function () {
                                 break;
                             }
                             else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
-                                $(id).removeClass("container");
-                                $(id).addClass("LeftItem");
+                                if (BorderGlowModern()) {
+                                    $(id).css("filter", "drop-shadow(-5px 0px 0px #07ff6e)");
+                                    $(id).css("filter", "drop-shadow(-5px 0px 0px " + map.settings.borderColourEquip + ")");
+                                } else {
+                                    $(id).removeClass("container");
+                                    $(id).addClass("LeftItem");
+                                }
                                 break;
                             }
                             else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
-                                $(id).removeClass("container");
-                                $(id).addClass("RightItem");
+                                if (BorderGlowModern()) {
+                                    $(id).css("filter", "drop-shadow(5px 0px 0px #07ff6e)");
+                                    $(id).css("filter", "drop-shadow(5px 0px 0px " + map.settings.borderColourEquip + ")");
+                                } else {
+                                    $(id).removeClass("container");
+                                    $(id).addClass("RightItem");
+                                }
                                 break;
                             }
                             else if (name == "hasWalljump" && data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
-                                $(id).removeClass("LeftItem");
-                                $(id).removeClass("RightItem");
-                                $(id).addClass("container");
+                                if (BorderGlowModern) {
+                                    $(id).css("filter", "");
+                                } else {
+                                    $(id).removeClass("LeftItem");
+                                    $(id).removeClass("RightItem");
+                                    $(id).addClass("container");
+                                }
                                 setSelected(data[name], id);
                                 break;
                             }
@@ -1269,7 +1297,7 @@ $(document).ready(function () {
         $('.container:not(.hideIfSet) div.itemDiv').css("display", "block");
         $('.container.hideIfSet div.itemDiv:has(>.selected)').css("display", "block");
         $('.container.hideIfSet div.itemDiv:has(>.multiple)').css("display", "block");
-        if (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
+        if (BorderGlowModern()) {
             if (map.settings.borderColourEquip == null) {
                 map.settings.borderColourEquip = "#07ff6e";
                 map.settings.borderColourObtain = "#ffffff";
@@ -1310,6 +1338,14 @@ $(document).ready(function () {
             $(id).addClass('multiple').parent().removeClass('hideIfSet');
         else if (!has && $(id).hasClass('multiple'))
             $(id).removeClass('multiple').parent().addClass('hideIfSet');
+    }
+
+    function BorderGlowModern() {
+        if (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
+            return true;
+        } else {
+            return false;
+        }
     }
 
     function getSubSortKeys(list) {

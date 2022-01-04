@@ -21,7 +21,7 @@ namespace PlayerDataDump
             PlayerCustom2,
             PlayerCustom3,
             Default,
-            Race
+            Minimal
         }
         public Style _TrackerStyle = Style.Classic;
         public Profile _TrackerProfile = Profile.PlayerCustom1;
