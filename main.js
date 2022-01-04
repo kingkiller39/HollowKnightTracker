@@ -9,6 +9,7 @@ var hasAppliedUS = false;
 var hasAppliedLS = false;
 var hasAppliedRS = false;
 var OBSProfile;
+var urlParams;
 $(document).ready(function () {
     /*
       var map;	
@@ -18,7 +19,7 @@ $(document).ready(function () {
       */
 
     var currentId;
-    var urlParams;
+    
     var style;
     var usingOBS = false;
 
