@@ -659,6 +659,11 @@ function getDefault() {
 		"settings": {
 			"Style": "Classic",
 			"hasItemColor": "#07ff6e",
+			"borderGlow": true,
+			"borderBlur": "4",
+			"borderColourObtain": "#FFFFFF",
+			"borderColourGave": "#FF0000",
+			"borderColourEquip": "#07FF6E",
 			"version":1.0
 		},
 		"misc_containers" : {

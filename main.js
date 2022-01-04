@@ -152,13 +152,34 @@ $(document).ready(function () {
                     isEditing = true;
                     $('#pageWidth').val(width);
                     $('#pageHeight').val(height);
+
+                    if (map.settings.borderColourEquip == null) {
+                        map.settings.borderGlow = true;
+                        map.settings.borderColourEquip = "#07ff6e";
+                        map.settings.borderColourObtain = "#ffffff";
+                        map.settings.borderColourGave = "#FF0000";
+                    }
+                    $('#borderGlowToggle').prop("checked", !map.settings.borderGlow);
+                    $('#borderObtainC').val(map.settings.borderColourObtain);
+                    $('#borderEquipC').val(map.settings.borderColourEquip);
+                    $('#borderGaveC').val(map.settings.borderColourGave);
                     $('html').css({ 'width': width + 'px', 'height': height + 'px' });
                     urlParams.editing = "true";
                     if (profileId == undefined)
                         profileId = 1;
 
                     init(function () {
+                        if (map.settings.borderColourEquip == null) {
+                            map.settings.borderGlow = false;
+                            map.settings.borderColourEquip = "#07ff6e";
+                            map.settings.borderColourObtain = "#ffffff";
+                            map.settings.borderColourGave = "#FF0000";
+                        }
 
+                        $('#borderGlowToggle').prop("checked", !map.settings.borderGlow);
+                        $('#borderObtainC').val(map.settings.borderColourObtain);
+                        $('#borderEquipC').val(map.settings.borderColourEquip);
+                        $('#borderGaveC').val(map.settings.borderColourGave);
                         updateUrlConfig();
                     });
 
@@ -367,6 +388,39 @@ $(document).ready(function () {
 
                 updateUrlConfig();
             });
+            $('#borderObtainC').on('change', function () {
+                var value = $('#borderObtainC').val();
+                if (/^#[0-9A-F]{6}$/i.test(value)) {
+                    map.settings.borderColourObtain = value;
+                    updateUrlConfig();
+                }
+            });
+            $('#borderGaveC').on('change', function () {
+                var value = $('#borderGaveC').val();
+                if (/^#[0-9A-F]{6}$/i.test(value)) {
+                    map.settings.borderColourGave = value;
+                    updateUrlConfig();
+                }
+            });
+            $('#borderEquipC').on('change', function () {
+                var value = $('#borderEquipC').val();
+                if (/^#[0-9A-F]{6}$/i.test(value)) {
+                    map.settings.borderColourEquip = value;
+                    updateUrlConfig();
+                }
+            });
+            $('#borderGlowToggle').on('change', function () {
+                if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Classic.css") {
+                    $(this).prop("checked", true);
+                }
+                if ($(this).is(':checked')) {
+                    map.settings.borderGlow = true;
+                } else {
+                    map.settings.borderGlow = false;
+                }
+                updateUrlConfig();
+            });
+
 
             $('#pageWidth').on('change', function () {
                 var value = $('#pageWidth').val();
@@ -956,10 +1010,13 @@ $(document).ready(function () {
                                     $(id).hide();
                                 else
                                     $(id).show();
-                                if (data[name.replace('got', 'equipped')] && !img.hasClass('equipped'))
+                                if (data[name.replace('got', 'equipped')] && !img.hasClass('equipped')) {
                                     img.addClass('equipped');
-                                else if (!data[name.replace('got', 'equipped')] && img.hasClass('equipped'))
+                                    img.parent().addClass('jello-horizontal')
+                                } else if (!data[name.replace('got', 'equipped')] && img.hasClass('equipped')) {
                                     img.removeClass('equipped');
+                                    img.parent().removeClass('jello-horizontal')
+                                }
                             } else {
                                 setSelected(data[name], id);
                                 if (!$(id).hasClass('selected'))
@@ -967,10 +1024,13 @@ $(document).ready(function () {
                                 else
                                     $(id).show();
 
-                                if (data[name.replace('got', 'equipped')] && !img.hasClass('equipped'))
+                                if (data[name.replace('got', 'equipped')] && !img.hasClass('equipped')) {
                                     img.addClass('equipped');
-                                else if (!data[name.replace('got', 'equipped')] && img.hasClass('equipped'))
+                                    img.parent().addClass('jello-horizontal');
+                                } else if (!data[name.replace('got', 'equipped')] && img.hasClass('equipped')) {
                                     img.removeClass('equipped');
+                                    img.parent().removeClass('jello-horizontal');
+                                }
 
 
 
@@ -1199,6 +1259,20 @@ $(document).ready(function () {
         $('.container:not(.hideIfSet) div.itemDiv').css("display", "block");
         $('.container.hideIfSet div.itemDiv:has(>.selected)').css("display", "block");
         $('.container.hideIfSet div.itemDiv:has(>.multiple)').css("display", "block");
+        if (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
+            if (map.settings.borderColourEquip == null) {
+                map.settings.borderColourEquip = "#07ff6e";
+                map.settings.borderColourObtain = "#ffffff";
+                map.settings.borderColourGave = "#FF0000";
+            }
+            $(".itemDiv > img").css("filter", "grayscale(1) brightness(.5)");
+            $(".itemDiv > .multiple").css("filter", "");
+            $(".selected").css("filter", "drop-shadow(0px 0px 5px #07ff6e)");
+            $(".selected").css("filter", "drop-shadow(0px 0px 5px " + map.settings.borderColourEquip + ")");
+            $(".gaveItem").css("filter", "grayscale(1) brightness(.8) drop-shadow(0px 0px 5px " + map.settings.borderColourGave + ")");
+            $(".charmDiv > .selected").css("filter", "grayscale(1) brightness(.5) drop-shadow(0px 0px 5px " + map.settings.borderColourObtain + ")");
+            $(".charmDiv > .equipped").css("filter", "drop-shadow(0px 0px 5px " + map.settings.borderColourEquip + ")");
+        }
     }
 
     function updateUrlConfig() {
@@ -1212,10 +1286,13 @@ $(document).ready(function () {
     }
 
     function setSelected(has, id) {
-        if (has && !$(id).hasClass('selected'))
+        if (has && !$(id).hasClass('selected')) {
+            $(id).parent().addClass('jello-horizontal');
             $(id).addClass('selected').parent().removeClass('hideIfSet');
-        else if (!has && $(id).hasClass('selected'))
+        } else if (!has && $(id).hasClass('selected')) {
+            $(id).parent().removeClass('jello-horizontal');
             $(id).removeClass('selected').parent().addClass('hideIfSet');
+        }
     }
 
     function setMultipleSelected(has, id) {
