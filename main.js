@@ -1122,6 +1122,7 @@ $(document).ready(function () {
                             }
                             else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
                                 if (BorderGlowModern()) {
+                                    console.log("applying left claw");
                                     $(id).css("filter", "drop-shadow(-5px 0px 0px #07ff6e)");
                                     $(id).css("filter", "drop-shadow(-5px 0px 0px " + map.settings.borderColourEquip + ")");
                                 } else {
