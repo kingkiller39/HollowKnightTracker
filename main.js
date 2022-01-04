@@ -489,6 +489,8 @@ $(document).ready(function () {
                 $(e.target).css("color", "#00FF00");
                 map.settings["Style"] = style;
                 document.getElementById("pagestyle").setAttribute("href", style + ".css");
+                data = [];
+                getPlayerData();
                 updateUrlConfig();
             });
 
@@ -888,7 +890,8 @@ $(document).ready(function () {
                         $('#Style div').css("color", "#FFFFFF");
                         $('#' + temp[1]).css("color", "#00FF00");
                         document.getElementById("pagestyle").setAttribute("href", style + ".css");
-                        
+                        data = [];
+                        getPlayerData();
                         return;
                     } else if (temp[0] == "Preset" && jQuery.isEmptyObject(urlParams)) {
                         if (temp[1].startsWith("PlayerCustom")) {
@@ -939,6 +942,13 @@ $(document).ready(function () {
         $(".equipped").removeClass("equipped");
         $(".multiple").removeClass("multiple");
         $(".gaveItem").removeClass("gaveItem");
+        $(".itemDiv > img").css("filter", "");
+        $(".itemDiv > .multiple").css("filter", "");
+        $(".selected").css("filter", "");
+        $(".selected").css("filter", "");
+        $(".gaveItem").css("filter", "");
+        $(".charmDiv > .selected").css("filter", "");
+        $(".charmDiv > .equipped").css("");
         hasAppliedDS = false;
         hasAppliedUS = false;
         hasAppliedLS = false;
