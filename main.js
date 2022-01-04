@@ -834,7 +834,7 @@ $(document).ready(function () {
                         $('#Style div').css("color", "#FFFFFF");
                         $('#' + temp[1]).css("color", "#00FF00");
                         document.getElementById("pagestyle").setAttribute("href", style + ".css");
-                        updateUrlConfig();
+                        
                         return;
                     } else if (temp[0] == "Preset" && jQuery.isEmptyObject(urlParams)) {
                         if (temp[1].startsWith("PlayerCustom")) {
