@@ -944,16 +944,13 @@ $(document).ready(function () {
     }
 
     function getPreset(filepath) {
-        var request = new XMLHttpRequest();
-        request.open("GET", filepath, false);
-        request.send(null);
-        request.onreadystatechange = function () {
-            if (request.readyState == XMLHttpRequest.DONE) {
-                console.log(request.responseText)
-                receivedRT = JSON.parse(request.responseText);
-                map = receivedRT.Data;
-            }
-        }
+        $.ajax({
+            type: 'GET',
+            url: filepath,
+            dataType: 'json',
+            success: function (data) { map = data },
+            async: false
+        });
     }
 
     function send(command) {
