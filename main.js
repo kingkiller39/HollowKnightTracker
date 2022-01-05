@@ -1242,7 +1242,7 @@ $(document).ready(function () {
         }
         if (hasAppliedDS && hasAppliedLS && hasAppliedRS && hasAppliedUS) {
             if (BorderGlowModern()) {
-                document.getElementById("nail").style = null;
+                document.getElementById("nail").style.boxShadow = null;
                 $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
             }
         }
