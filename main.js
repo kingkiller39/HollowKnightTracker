@@ -905,13 +905,13 @@ $(document).ready(function () {
                             updatePlayerData();
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Minimal_Left") {
-                            console.log("Minimum-Right Preset");
+                            console.log("Minimum-Left Preset");
                             getPreset("./ProfileMinLeft.json")
                             loadDivs();
                             updatePlayerData();
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Minimal_Right") {
-                            console.log("Minimum-Left Preset");
+                            console.log("Minimum-Right Preset");
                             getPreset("./ProfileMinRight.json")
                             loadDivs();
                             updatePlayerData();
@@ -949,7 +949,9 @@ $(document).ready(function () {
         request.send(null);
         request.onreadyState = function () {
             if (request.status == 0) {
-                map = JSON.parse(atob(request.responseText));
+                console.log(request.responseText)
+                receivedRT = JSON.parse(atob(request.responseText));
+                map = receivedRT.Data;
             }
         }
     }
