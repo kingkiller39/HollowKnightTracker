@@ -947,10 +947,10 @@ $(document).ready(function () {
         var request = new XMLHttpRequest();
         request.open("Get", filepath, false);
         request.send(null);
-        request.onreadyState = function () {
-            if (request.status == 200) {
+        request.onreadystatechange = function () {
+            if (request.readyState == XMLHttpRequest.DONE) {
                 console.log(request.responseText)
-                receivedRT = JSON.parse(atob(request.responseText));
+                receivedRT = JSON.parse(request.responseText);
                 map = receivedRT.Data;
             }
         }
