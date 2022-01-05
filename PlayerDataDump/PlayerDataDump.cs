@@ -78,8 +78,9 @@ namespace PlayerDataDump
                         "Player Custom 1",
                         "Player Custom 2",
                         "Player Custom 3",
-                        "Default",
-                        "Race"
+                        "Everything",
+                        "Minimal Left",
+                        "Minimal Right"
                     },
                     
                     Saver = opt => GS.TrackerProfile = (GlobalSettings.Profile)opt,

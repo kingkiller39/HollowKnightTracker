@@ -900,20 +900,20 @@ $(document).ready(function () {
                             return;
                         } else if (temp[0] == "Everything") {
                             console.log("Everything Preset");
-                            map = getPreset("./ProfileEverything.json")
+                            getPreset("./ProfileEverything.json")
                             loadDivs();
                             updatePlayerData();
                             return;
                             //todo load default premade profile
                         } else if (temp[0] == "Minimal_Left") {
                             console.log("Minimum-Right Preset");
-                            map = getPreset("./ProfileMinRight.json")
+                            getPreset("./ProfileMinLeft.json")
                             loadDivs();
                             updatePlayerData();
                             return;
                         } else if (temp[0] == "Minimal_Right") {
                             console.log("Minimum-Left Preset");
-                            map = getPreset("./ProfileMinLeft.json")
+                            getPreset("./ProfileMinRight.json")
                             loadDivs();
                             updatePlayerData();
                             return;
@@ -950,7 +950,7 @@ $(document).ready(function () {
         request.send(null);
         request.onreadyState = function () {
             if (request.readyState === 4 && request.status === 200) {
-                return JSON.parse(atob(request.responseText));
+                map = JSON.parse(atob(request.responseText));
             }
         }
     }
