@@ -898,19 +898,19 @@ $(document).ready(function () {
                             OBSProfile = temp[1].charAt(temp[1].length - 1);
                             wsprofile.send("load|" + OBSProfile);
                             return;
-                        } else if (temp[0] == "Everything") {
+                        } else if (temp[0] == "Preset" && temp[1] == "Everything") {
                             console.log("Everything Preset");
                             getPreset("./ProfileEverything.json")
                             loadDivs();
                             updatePlayerData();
                             return;
-                        } else if (temp[0] == "Minimal_Left") {
+                        } else if (temp[0] == "Preset" && temp[1] == "Minimal_Left") {
                             console.log("Minimum-Right Preset");
                             getPreset("./ProfileMinLeft.json")
                             loadDivs();
                             updatePlayerData();
                             return;
-                        } else if (temp[0] == "Minimal_Right") {
+                        } else if (temp[0] == "Preset" && temp[1] == "Minimal_Right") {
                             console.log("Minimum-Left Preset");
                             getPreset("./ProfileMinRight.json")
                             loadDivs();
