@@ -29,6 +29,7 @@ namespace PlayerDataDump
         private static readonly string[] LeftCloak = new string[] { "Left_Mothwing_Cloak", "Left_Mothwing_Cloak_(1)", "Left_Shade_Cloak", "Left_Shade_Cloak_(1)" };
         private static readonly string[] RightCloack = new string[] { "Right_Mothwing_Cloak", "Right_Mothwing_Cloak_(1)", "Right_Shade_Cloak", "Right_Shade_Cloak_(1)" };
         private static readonly string[] ElevatorPass = new string[] { "ElevatorPass", "Elevator_Pass" };
+        private static readonly string[] Slashes = new string[] { "UpSlash", "LeftSlash", "RightSlash" };
         private bool randoAtBench { get; set; }
         private bool randoHasLeftDash { get; set; }
         private bool randoHasRightDash { get; set; }
@@ -261,20 +262,29 @@ namespace PlayerDataDump
 
         public void getCursedNail()
         {
-            if (!RandomizerMod.RandomizerMod.Instance.Settings.CursedNail) return;
-            if (RandomizerMod.RandomizerMod.Instance.Settings.GetItemsFound().Any("Upslash".Contains) && !randoHasUpSlash)
+            var settings = RandomizerMod.RandomizerMod.Instance.Settings;
+
+            if (!settings.CursedNail) return;
+
+            if (settings.GetItemsFound().All(Slashes.Contains))
+            {
+                SendMessage("FullNail", "true");
+                return;
+            }
+
+            if (settings.GetItemsFound().Any("Upslash".Contains) && !randoHasUpSlash)
             {
                 randoHasUpSlash = true;
                 SendMessage("Upslash", "true");
             }
 
-            if (RandomizerMod.RandomizerMod.Instance.Settings.GetItemsFound().Any("Leftslash".Contains) && !randoHasLeftSlash)
+            if (settings.GetItemsFound().Any("Leftslash".Contains) && !randoHasLeftSlash)
             {
                 randoHasLeftSlash = true;
                 SendMessage("Leftslash", "true");
             }
 
-            if (RandomizerMod.RandomizerMod.Instance.Settings.GetItemsFound().Any("Rightslash".Contains) && !randoHasRightSlash)
+            if (settings.GetItemsFound().Any("Rightslash".Contains) && !randoHasRightSlash)
             {
                 randoHasRightSlash = true;
                 SendMessage("Rightslash", "true");

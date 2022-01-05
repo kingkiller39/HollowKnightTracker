@@ -1240,10 +1240,11 @@ $(document).ready(function () {
         if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
             document.getElementById("nail").style.filter = "grayscale(0%)";
         }
+        /*
         if (hasAppliedDS && hasAppliedLS && hasAppliedRS && hasAppliedUS) {
                 document.getElementById("nail").style.boxShadow = null;
                 $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
-        }
+        }*/
         if (data["FullNail"]) {
             $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
         }
