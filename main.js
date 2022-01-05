@@ -904,7 +904,6 @@ $(document).ready(function () {
                             loadDivs();
                             updatePlayerData();
                             return;
-                            //todo load default premade profile
                         } else if (temp[0] == "Minimal_Left") {
                             console.log("Minimum-Right Preset");
                             getPreset("./ProfileMinLeft.json")
@@ -949,7 +948,7 @@ $(document).ready(function () {
         request.open("Get", filepath, false);
         request.send(null);
         request.onreadyState = function () {
-            if (request.readyState === 4 && request.status === 200) {
+            if (request.status == 0) {
                 map = JSON.parse(atob(request.responseText));
             }
         }
