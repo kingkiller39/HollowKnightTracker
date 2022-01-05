@@ -899,22 +899,28 @@ $(document).ready(function () {
                             wsprofile.send("load|" + OBSProfile);
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Everything") {
-                            console.log("Everything Preset");
-                            getPreset("./ProfileEverything.json")
+                            getPreset("./Presets/ProfileEverything.json")
                             loadDivs();
                             updatePlayerData();
+                            if (usingOBS && jQuery.isEmptyObject(urlParams)) {
+                                wsprofile.send("OBSGetStyle");
+                            }
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Minimal_Left") {
-                            console.log("Minimum-Left Preset");
-                            getPreset("./ProfileMinLeft.json")
+                            getPreset("./Presets/ProfileMinLeft.json")
                             loadDivs();
                             updatePlayerData();
+                            if (usingOBS && jQuery.isEmptyObject(urlParams)) {
+                                wsprofile.send("OBSGetStyle");
+                            }
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Minimal_Right") {
-                            console.log("Minimum-Right Preset");
-                            getPreset("./ProfileMinRight.json")
+                            getPreset("./Presets/ProfileMinRight.json")
                             loadDivs();
                             updatePlayerData();
+                            if (usingOBS && jQuery.isEmptyObject(urlParams)) {
+                                wsprofile.send("OBSGetStyle");
+                            }
                             return;
                         } else return;
                     } else return;
