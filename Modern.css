@@ -101,10 +101,10 @@ div.charmDiv > img {
     display: block !important;
 }
 
-.container > div.itemDiv > img#hasDash:not(.selected) {
+/*.container > div.itemDiv > img#hasDash:not(.selected) {
     transform: scaleX(-1) translateY(-50%)
     /*transform: scaleX(-0.8) scaleY(0.8) translateY(-60%)*/
-}
+}*/
 
 .container > div.itemDiv:not(.charmDiv) > img.selected {
     -webkit-filter: grayscale(0%); /* Safari 6.0 - 9.0 */
@@ -269,6 +269,13 @@ ul li {
 
 .pageButton span {
     float: left;
+}
+
+.LeftItem {
+    filter: drop-shadow(rgb(7, 100, 50) -6px 0px 1px)
+}
+.LeftItem-clip{
+    clip-path: polygon(-20% 0%, 100% 0%, 100% 100%, -20% 100%)
 }
 
 .jello-horizontal {

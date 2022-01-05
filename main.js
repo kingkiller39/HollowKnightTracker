@@ -1085,8 +1085,7 @@ $(document).ready(function () {
                             }
                             else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) { //can dash left
                                 if (BorderGlowModern()) {
-                                    $(id).css("filter", "drop-shadow(-5px 0px 0px #07ff6e)");
-                                    $(id).css("filter", "drop-shadow(-5px 0px 0px " + map.settings.borderColourEquip + ")");
+                                    $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
                                 } else {
                                     $(id).removeClass("container");
                                     $(id).addClass("LeftItem");
@@ -1095,8 +1094,7 @@ $(document).ready(function () {
                             }
                             else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) { //can dash right
                                 if (BorderGlowModern()) {
-                                    $(id).css("filter", "drop-shadow(5px 0px 0px #07ff6e)");
-                                    $(id).css("filter", "drop-shadow(5px 0px 0px " + map.settings.borderColourEquip + ")");
+                                    $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
                                 } else {
                                     $(id).removeClass("container");
                                     $(id).addClass("RightItem");
@@ -1122,8 +1120,7 @@ $(document).ready(function () {
                             else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
                                 if (BorderGlowModern()) {
                                     console.log("applying left claw");
-                                    $(id).css("filter", "drop-shadow(-5px 0px 0px #07ff6e)");
-                                    $(id).css("filter", "drop-shadow(-5px 0px 0px " + map.settings.borderColourEquip + ")");
+                                    $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
                                 } else {
                                     $(id).removeClass("container");
                                     $(id).addClass("LeftItem");
@@ -1132,8 +1129,7 @@ $(document).ready(function () {
                             }
                             else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
                                 if (BorderGlowModern()) {
-                                    $(id).css("filter", "drop-shadow(5px 0px 0px #07ff6e)");
-                                    $(id).css("filter", "drop-shadow(5px 0px 0px " + map.settings.borderColourEquip + ")");
+                                    $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
                                 } else {
                                     $(id).removeClass("container");
                                     $(id).addClass("RightItem");
