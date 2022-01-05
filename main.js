@@ -948,7 +948,7 @@ $(document).ready(function () {
         request.open("Get", filepath, false);
         request.send(null);
         request.onreadyState = function () {
-            if (request.status == 0) {
+            if (request.status == 200) {
                 console.log(request.responseText)
                 receivedRT = JSON.parse(atob(request.responseText));
                 map = receivedRT.Data;
