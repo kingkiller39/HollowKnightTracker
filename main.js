@@ -898,10 +898,25 @@ $(document).ready(function () {
                             OBSProfile = temp[1].charAt(temp[1].length - 1);
                             wsprofile.send("load|" + OBSProfile);
                             return;
-                        } else if (temp[0] == "Default") {
-                            console.log("Default");
+                        } else if (temp[0] == "Everything") {
+                            console.log("Everything Preset");
+                            map = getPreset("./ProfileEverything.json")
+                            loadDivs();
+                            updatePlayerData();
                             return;
                             //todo load default premade profile
+                        } else if (temp[0] == "MinRight") {
+                            console.log("Minimum-Right Preset");
+                            map = getPreset("./ProfileMinRight.json")
+                            loadDivs();
+                            updatePlayerData();
+                            return;
+                        } else if (temp[0] == "MinLeft") {
+                            console.log("Minimum-Left Preset");
+                            map = getPreset("./ProfileMinLeft.json")
+                            loadDivs();
+                            updatePlayerData();
+                            return;
                         } else return;
                     } else return;
                 } else if (profileId == temp[0] || OBSProfile == temp[0]) {
@@ -922,11 +937,22 @@ $(document).ready(function () {
             };
 
             wsprofile.onopen = callback;
-
+            
         } catch (e) {
             console.log(e);
         }
 
+    }
+
+    function getPreset(filepath) {
+        var request = new XMLHttpRequest();
+        request.open("Get", filepath, false);
+        request.send(null);
+        request.onreadyState = function () {
+            if (request.readyState === 4 && request.status === 200) {
+                return JSON.parse(atob(request.responseText));
+            }
+        }
     }
 
     function send(command) {
@@ -1240,11 +1266,7 @@ $(document).ready(function () {
         if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
             document.getElementById("nail").style.filter = "grayscale(0%)";
         }
-        /*
-        if (hasAppliedDS && hasAppliedLS && hasAppliedRS && hasAppliedUS) {
-                document.getElementById("nail").style.boxShadow = null;
-                $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
-        }*/
+
         if (data["FullNail"]) {
             $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
         } else {

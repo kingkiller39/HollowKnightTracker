@@ -23,6 +23,7 @@ namespace PlayerDataDump
             randoHasElevatorPass = false;
             randoHasDreamer = false;
             randoHasFocus = false;
+            randoHasFullNail = false;
         }
 
         private static readonly HashSet<string> IntKeysToSend = new HashSet<string> {"simpleKeys", "nailDamage", "maxHealth", "MPReserveMax", "ore", "rancidEggs", "grubsCollected", "charmSlotsFilled", "charmSlots", "flamesCollected" };
@@ -42,6 +43,8 @@ namespace PlayerDataDump
         private bool randoHasElevatorPass { get; set; }
         private bool randoHasDreamer { get; set; }
         private bool randoHasFocus { get; set; }
+        private bool randoHasFullNail { get; set; }
+
         public void Broadcast(string s)
         {
             Sessions.Broadcast(s);
@@ -60,15 +63,15 @@ namespace PlayerDataDump
                     Send($"{{ \"version\":\"{PlayerDataDump.Instance.GetVersion()}\" }}");
                     break;
                 case "json":
-                    randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = false;
+                    randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = randoHasFullNail = false;
                     Send(GetJson());
-                    GetRandom();
                     SplitItems();
                     getCursedNail();
                     getSwim();
                     getElevatorPass();
                     getDreamer();
                     getFocus();
+                    GetRandom();
                     break;
                 default:
                     if (e.Data.Contains('|'))
@@ -108,7 +111,7 @@ namespace PlayerDataDump
             ModHooks.SetPlayerIntHook -= EchoInt;
             On.GameMap.Start -= gameMapStart;
             ModHooks.ApplicationQuitHook -= OnQuit;
-            randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = false;
+            randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = randoHasFullNail = false;
             PlayerDataDump.Instance.Log("CLOSE: Code:" + e.Code + ", Reason:" + e.Reason);
         }
 
@@ -129,14 +132,14 @@ namespace PlayerDataDump
         {
             if (State != WebSocketState.Open) return;
             PlayerDataDump.Instance.LogDebug("Loaded Save");
-            randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = false;
-            GetRandom();
+            randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = randoHasFullNail = false;
+            //GetRandom();
             SendMessage("SaveLoaded", "true");
         }
         public void LoadSave()
         {
             if (State != WebSocketState.Open) return;
-            GetRandom();
+            //GetRandom();
             SendMessage("SaveLoaded", "true");
         }
 
@@ -265,15 +268,11 @@ namespace PlayerDataDump
             var settings = RandomizerMod.RandomizerMod.Instance.Settings;
 
             if (!settings.CursedNail) return;
+
             var result = Slashes.Intersect(settings.GetItemsFound());
-            /*PlayerDataDump.Instance.LogDebug("Begin Item Dump");
-            foreach (string itemfound in settings.GetItemsFound()) {
-                PlayerDataDump.Instance.LogDebug(itemfound);
-            }
-            PlayerDataDump.Instance.LogDebug("End Item Dump");*/
             if (result.Count() == Slashes.Length)
             {
-                PlayerDataDump.Instance.LogDebug("Sending FullNail");
+                randoHasFullNail = true;
                 SendMessage("FullNail", "true");
                 return;
             }
@@ -346,7 +345,7 @@ namespace PlayerDataDump
                 var settings = RandomizerMod.RandomizerMod.Instance.Settings;
                 if (settings.Randomizer)
                 {
-                    if (settings.CursedNail)
+                    if (settings.CursedNail && !randoHasFullNail)
                     {
                         SendMessage("Downslash", "true");
                     }
@@ -517,8 +516,8 @@ namespace PlayerDataDump
         {
             if (State != WebSocketState.Open) return;
             PlayerDataDump.Instance.LogDebug("Loaded New Save");
-            randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = false;
-            GetRandom();
+            randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = randoHasFullNail = false;
+            //GetRandom();
             SendMessage("NewSave", "true");
         }
 
@@ -526,8 +525,8 @@ namespace PlayerDataDump
         {
             orig(self);
             if (State != WebSocketState.Open) return;
-            randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = false;
-            GetRandom();
+            randoHasLeftDash = randoHasRightDash = randoHasLeftClaw = randoHasRightClaw = randoHasUpSlash = randoHasLeftSlash = randoHasRightSlash = randoHasSwim = randoHasElevatorPass = randoHasDreamer = randoHasFocus = randoHasFullNail = false;
+            //GetRandom();
             SendMessage("NewSave", "true");
         }
 
