@@ -1237,6 +1237,9 @@ $(document).ready(function () {
         updateVisible();
     }
     function handleCursedNail() {
+        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
+            document.getElementById("nail").style.filter = "grayscale(0%)";
+        }
         if (data["FullNail"]) {
             $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
         }
