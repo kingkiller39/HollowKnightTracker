@@ -1241,10 +1241,8 @@ $(document).ready(function () {
             document.getElementById("nail").style.filter = "grayscale(0%)";
         }
         if (hasAppliedDS && hasAppliedLS && hasAppliedRS && hasAppliedUS) {
-            if (BorderGlowModern()) {
                 document.getElementById("nail").style.boxShadow = null;
                 $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
-            }
         }
         if (data["FullNail"]) {
             $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
