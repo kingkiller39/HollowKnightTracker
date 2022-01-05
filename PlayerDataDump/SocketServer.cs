@@ -29,7 +29,7 @@ namespace PlayerDataDump
         private static readonly string[] LeftCloak = new string[] { "Left_Mothwing_Cloak", "Left_Mothwing_Cloak_(1)", "Left_Shade_Cloak", "Left_Shade_Cloak_(1)" };
         private static readonly string[] RightCloack = new string[] { "Right_Mothwing_Cloak", "Right_Mothwing_Cloak_(1)", "Right_Shade_Cloak", "Right_Shade_Cloak_(1)" };
         private static readonly string[] ElevatorPass = new string[] { "ElevatorPass", "Elevator_Pass" };
-        private static readonly string[] Slashes = new string[] { "UpSlash", "LeftSlash", "RightSlash" };
+        private static readonly string[] Slashes = new string[] { "Upslash", "Leftslash", "Rightslash" };
         private bool randoAtBench { get; set; }
         private bool randoHasLeftDash { get; set; }
         private bool randoHasRightDash { get; set; }
@@ -265,9 +265,15 @@ namespace PlayerDataDump
             var settings = RandomizerMod.RandomizerMod.Instance.Settings;
 
             if (!settings.CursedNail) return;
-
-            if (settings.GetItemsFound().All(Slashes.Contains))
+            var result = Slashes.Intersect(settings.GetItemsFound());
+            /*PlayerDataDump.Instance.LogDebug("Begin Item Dump");
+            foreach (string itemfound in settings.GetItemsFound()) {
+                PlayerDataDump.Instance.LogDebug(itemfound);
+            }
+            PlayerDataDump.Instance.LogDebug("End Item Dump");*/
+            if (result.Count() == Slashes.Length)
             {
+                PlayerDataDump.Instance.LogDebug("Sending FullNail");
                 SendMessage("FullNail", "true");
                 return;
             }

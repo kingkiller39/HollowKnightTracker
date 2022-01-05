@@ -1247,47 +1247,48 @@ $(document).ready(function () {
         }*/
         if (data["FullNail"]) {
             $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
-        }
-        if (data["Downslash"] && !hasAppliedDS) {
-            hasAppliedDS = true;
-            if (!hasAppliedUS && !hasAppliedLS && !hasAppliedRS) {
-                document.getElementById("nail").style.boxShadow = "0px 5px 0px -3px #07ff6e";
-            }
-            else {
-                document.getElementById("nail").style.boxShadow += ", 0px 5px 0px -3px #07ff6e";
-            }
+        } else {
+            if (data["Downslash"] && !hasAppliedDS) {
+                hasAppliedDS = true;
+                if (!hasAppliedUS && !hasAppliedLS && !hasAppliedRS) {
+                    document.getElementById("nail").style.boxShadow = "0px 5px 0px -3px #07ff6e";
+                }
+                else {
+                    document.getElementById("nail").style.boxShadow += ", 0px 5px 0px -3px #07ff6e";
+                }
 
-            hasAppliedDS = true;
-        }
-        if (data["Upslash"] && !hasAppliedUS) {
-            hasAppliedUS = true;
-            if (!hasAppliedDS && !hasAppliedLS && !hasAppliedRS) {
-                document.getElementById("nail").style.boxShadow = "0px -5px 0px -3px #07ff6e";
+                hasAppliedDS = true;
             }
-            else {
-                document.getElementById("nail").style.boxShadow += ", 0px -5px 0px -3px #07ff6e";
+            if (data["Upslash"] && !hasAppliedUS) {
+                hasAppliedUS = true;
+                if (!hasAppliedDS && !hasAppliedLS && !hasAppliedRS) {
+                    document.getElementById("nail").style.boxShadow = "0px -5px 0px -3px #07ff6e";
+                }
+                else {
+                    document.getElementById("nail").style.boxShadow += ", 0px -5px 0px -3px #07ff6e";
+                }
+                hasAppliedUS = true;
             }
-            hasAppliedUS = true;
-        }
-        if (data["Leftslash"] && !hasAppliedLS) {
-            hasAppliedLS = true;
-            if (!hasAppliedDS && !hasAppliedUS && !hasAppliedRS) {
-                document.getElementById("nail").style.boxShadow = "-5px 0px 0px -3px #07ff6e";
+            if (data["Leftslash"] && !hasAppliedLS) {
+                hasAppliedLS = true;
+                if (!hasAppliedDS && !hasAppliedUS && !hasAppliedRS) {
+                    document.getElementById("nail").style.boxShadow = "-5px 0px 0px -3px #07ff6e";
+                }
+                else {
+                    document.getElementById("nail").style.boxShadow += ", -5px 0px 0px -3px #07ff6e";
+                }
+                hasAppliedLS = true;
             }
-            else {
-                document.getElementById("nail").style.boxShadow += ", -5px 0px 0px -3px #07ff6e";
+            if (data["Rightslash"] && !hasAppliedRS) {
+                hasAppliedRS = true;
+                if (!hasAppliedDS && !hasAppliedUS && !hasAppliedLS) {
+                    document.getElementById("nail").style.boxShadow = "5px 0px 0px -3px #07ff6e";
+                }
+                else {
+                    document.getElementById("nail").style.boxShadow += ", 5px 0px 0px -3px #07ff6e";
+                }
+                hasAppliedRS = true;
             }
-            hasAppliedLS = true;
-        }
-        if (data["Rightslash"] && !hasAppliedRS) {
-            hasAppliedRS = true;
-            if (!hasAppliedDS && !hasAppliedUS && !hasAppliedLS) {
-                document.getElementById("nail").style.boxShadow = "5px 0px 0px -3px #07ff6e";
-            }
-            else {
-                document.getElementById("nail").style.boxShadow += ", 5px 0px 0px -3px #07ff6e";
-            }
-            hasAppliedRS = true;
         }
         if (data["nailSmithUpgrades"] > 0) {
             $("#nail" + '_count').html(data["nailSmithUpgrades"]).show();
