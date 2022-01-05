@@ -1085,7 +1085,7 @@ $(document).ready(function () {
                             }
                             else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) { //can dash left
                                 if (BorderGlowModern()) {
-                                    $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
+                                    $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
                                 } else {
                                     $(id).removeClass("container");
                                     $(id).addClass("LeftItem");
@@ -1094,7 +1094,8 @@ $(document).ready(function () {
                             }
                             else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) { //can dash right
                                 if (BorderGlowModern()) {
-                                    $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
+                                    $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
+                                    
                                 } else {
                                     $(id).removeClass("container");
                                     $(id).addClass("RightItem");
