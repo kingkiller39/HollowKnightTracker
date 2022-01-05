@@ -905,13 +905,13 @@ $(document).ready(function () {
                             updatePlayerData();
                             return;
                             //todo load default premade profile
-                        } else if (temp[0] == "MinRight") {
+                        } else if (temp[0] == "Minimal_Left") {
                             console.log("Minimum-Right Preset");
                             map = getPreset("./ProfileMinRight.json")
                             loadDivs();
                             updatePlayerData();
                             return;
-                        } else if (temp[0] == "MinLeft") {
+                        } else if (temp[0] == "Minimal_Right") {
                             console.log("Minimum-Left Preset");
                             map = getPreset("./ProfileMinLeft.json")
                             loadDivs();
