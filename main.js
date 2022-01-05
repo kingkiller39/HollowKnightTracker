@@ -945,7 +945,7 @@ $(document).ready(function () {
 
     function getPreset(filepath) {
         var request = new XMLHttpRequest();
-        request.open("Get", filepath, false);
+        request.open("GET", filepath, false);
         request.send(null);
         request.onreadystatechange = function () {
             if (request.readyState == XMLHttpRequest.DONE) {
