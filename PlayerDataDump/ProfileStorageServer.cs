@@ -46,8 +46,10 @@ namespace PlayerDataDump
             } else if (e.Data.StartsWith("OBSGetStyle"))
             {
                 OnStyleEvent();
-            }
-            else
+            } else if (e.Data.StartsWith("OBSGetGlow"))
+            {
+                onGlowEvent();
+            }else
             {
                 Send("load|int,save|int|{data}");
             }
@@ -86,6 +88,7 @@ namespace PlayerDataDump
             base.OnClose(e);
             GlobalSettings.StyleEvent -= OnStyleEvent;
             GlobalSettings.PresetEvent -= OnPresetEvent;
+            GlobalSettings.GlowEvent -= onGlowEvent;
             PlayerDataDump.Instance.Log("[ProfileStorage] CLOSE: Code:" + e.Code + ", Reason:" + e.Reason);
         }
 
@@ -96,13 +99,18 @@ namespace PlayerDataDump
 
         public void OnStyleEvent()
         {
-            PlayerDataDump.Instance.Log("sending: " + "Style|" + PlayerDataDump.GS.TrackerStyle);
+            PlayerDataDump.Instance.LogDebug("sending: " + "Style|" + PlayerDataDump.GS.TrackerStyle);
             Send("Style|" + PlayerDataDump.GS.TrackerStyle);
         }
         public void OnPresetEvent()
         {
-            PlayerDataDump.Instance.Log("sending: " + "Preset|" + PlayerDataDump.GS.TrackerProfile);
+            PlayerDataDump.Instance.LogDebug("sending: " + "Preset|" + PlayerDataDump.GS.TrackerProfile);
             Send("Preset|" + PlayerDataDump.GS.TrackerProfile);
+        }
+        public void onGlowEvent()
+        {
+            PlayerDataDump.Instance.LogDebug("sending: " + "BorderGlow|" + PlayerDataDump.GS.TrackerGlow);
+            Send("BorderGlow|" + PlayerDataDump.GS.TrackerGlow);
         }
     }
 }

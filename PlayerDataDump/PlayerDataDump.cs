@@ -52,6 +52,7 @@ namespace PlayerDataDump
             _wss.AddWebSocketService<ProfileStorageServer>("/ProfileStorage", ss => {
                 GlobalSettings.StyleEvent += ss.OnStyleEvent;
                 GlobalSettings.PresetEvent += ss.OnPresetEvent;
+                GlobalSettings.GlowEvent += ss.onGlowEvent;
             });
             
             _wss.Start();
@@ -68,7 +69,19 @@ namespace PlayerDataDump
                     Values = StyleValues,
                     Saver = opt => GS.TrackerStyle = (GlobalSettings.Style)opt,
                     Loader = () => (int)GS.TrackerStyle
-        },
+                },
+                new IMenuMod.MenuEntry
+                {
+                    Name = "Border Glow",
+                    Description = "Enable or Disable Border Glow when using Modern Style",
+                    Values = new string []
+                    {
+                        "On",
+                        "Off"
+                    },
+                    Saver = opt => GS.TrackerGlow = (GlobalSettings.BorderGlow)opt,
+                    Loader = () => (int)GS.TrackerGlow
+                },
                 new IMenuMod.MenuEntry
                 {
                     Name = "Presets",
@@ -80,7 +93,8 @@ namespace PlayerDataDump
                         "Player Custom 3",
                         "Everything",
                         "Minimal Left",
-                        "Minimal Right"
+                        "Minimal Right",
+                        "Rando Racing"
                     },
                     
                     Saver = opt => GS.TrackerProfile = (GlobalSettings.Profile)opt,

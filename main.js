@@ -893,6 +893,15 @@ $(document).ready(function () {
                         data = [];
                         getPlayerData();
                         return;
+                    } else if (temp[0] == "BorderGlow") {
+                        if (temp[1] == "On") {
+                            map.settings.borderGlow = true;
+                        } else {
+                            map.settings.borderGlow = false;
+                        }
+                        loadDivs();
+                        updatePlayerData();
+                        return;
                     } else if (temp[0] == "Preset" && jQuery.isEmptyObject(urlParams)) {
                         if (temp[1].startsWith("PlayerCustom")) {
                             OBSProfile = temp[1].charAt(temp[1].length - 1);
@@ -904,6 +913,7 @@ $(document).ready(function () {
                             updatePlayerData();
                             if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                                 wsprofile.send("OBSGetStyle");
+                                wsprofile.send("OBSGetGlow");
                             }
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Minimal_Left") {
@@ -912,6 +922,7 @@ $(document).ready(function () {
                             updatePlayerData();
                             if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                                 wsprofile.send("OBSGetStyle");
+                                wsprofile.send("OBSGetGlow");
                             }
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Minimal_Right") {
@@ -920,18 +931,28 @@ $(document).ready(function () {
                             updatePlayerData();
                             if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                                 wsprofile.send("OBSGetStyle");
+                                wsprofile.send("OBSGetGlow");
                             }
                             return;
-                        } else return;
+                        } else if (temp[0] == "Preset" && temp[1] == "Rando_Racing") {
+                            getPreset("./Presets/ProfileRandoRacing.json")
+                            loadDivs();
+                            updatePlayerData();
+                            if (usingOBS && jQuery.isEmptyObject(urlParams)) {
+                                wsprofile.send("OBSGetStyle");
+                                wsprofile.send("OBSGetGlow");
+                            }
+                            return;
+                        }else return;
                     } else return;
                 } else if (profileId == temp[0] || OBSProfile == temp[0]) {
                     console.log("Profile ID matches, updating screen");
-
                     map = JSON.parse(atob(temp[1]));
                     loadDivs();
                     updatePlayerData();
                     if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                         wsprofile.send("OBSGetStyle");
+                        wsprofile.send("OBSGetGlow");
                     }
                 }
 
@@ -1373,7 +1394,6 @@ $(document).ready(function () {
     }
 
     function BorderGlowModern() {
-        console.log("BorderGlowModer: " + (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css"));
         return (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css");
     }
 
