@@ -93,7 +93,7 @@
       "scale": 40,
       "left": 0,
       "top": 1025.9766200000001,
-      "width": 451.035,
+      "width": 451,
       "height": 49.06250249999994,
       "items": [
         "hasDash",
@@ -108,11 +108,11 @@
       ]
     },
     "spells": {
-      "flourish": "none",
+      "flourish": "topRight",
       "scale": 40,
-      "left": 1,
+      "left": 0,
       "top": 975,
-      "width": 211.05859624999994,
+      "width": 451,
       "height": 50,
       "items": [
         "screamLevel",
