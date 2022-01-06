@@ -982,7 +982,9 @@ $(document).ready(function () {
 
     function send(command) {
         lastCommand = command;
-        ws.send(command);
+        if (ws.readyState == 1) {
+            ws.send(command);
+        }
     }
 
 
