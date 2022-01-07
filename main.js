@@ -1053,6 +1053,17 @@ $(document).ready(function () {
         } else {
             if (minData != undefined) {
                 data = minData;
+                if (data["nail"] == undefined) { data["nail"] = false; }
+                if (data["FullNail"] == undefined) { data["FullNail"] = false; }
+                if (data["canDownslash"] == undefined) { data["canDownslash"] = false; }
+                if (data["canSideslashLeft"] == undefined) { data["canSideslashLeft"] = false; }
+                if (data["canSideslashRight"] == undefined) { data["canSideslashRight"] = false; }
+                if (data["canUpslash"] == undefined) { data["canUpslash"] = false; }
+                if (data["swim"] == undefined) { data["swim"] = false; }
+                if (data["elevatorPass"] == undefined) { data["elevatorPass"] = false; }
+                if (data["DuplicateDreamer"] == undefined) { data["DuplicateDreamer"] = false; }
+                if (data["canFocus"] == undefined) { data["canFocus"] = false; }
+                if (data["version"] == undefined) { data["version"] = "1"; }
             }
         }
 
