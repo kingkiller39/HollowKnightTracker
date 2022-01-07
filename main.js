@@ -1300,7 +1300,7 @@ $(document).ready(function () {
             $(id).removeClass("NailDownLeftRight");
             $(id).removeClass("NailDownUpRight");
             $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
-        } else if (data["canDownSlash"] && !data["canSideslashLeft"] && !data["canSideslashRight"] && !data["canUpslash"]) { //down slash
+        } else if (data["canDownslash"] && !data["canSideslashLeft"] && !data["canSideslashRight"] && !data["canUpslash"]) { //down slash
             $(id).removeClass("NailDownLeft");
             $(id).removeClass("NailDownUp");
             $(id).removeClass("NailDownRight");
@@ -1308,7 +1308,7 @@ $(document).ready(function () {
             $(id).removeClass("NailDownLeftRight");
             $(id).removeClass("NailDownUpRight");
             $(id).addClass("NailDown");
-        } else if (data["canDownSlash"] && data["canSideslashLeft"] && !data["canSideslashRight"] && !data["canUpslash"]) { // down left slash
+        } else if (data["canDownslash"] && data["canSideslashLeft"] && !data["canSideslashRight"] && !data["canUpslash"]) { // down left slash
             $(id).removeClass("NailDown");
             $(id).removeClass("NailDownUp");
             $(id).removeClass("NailDownRight");
@@ -1316,7 +1316,7 @@ $(document).ready(function () {
             $(id).removeClass("NailDownLeftRight");
             $(id).removeClass("NailDownUpRight");
             $(id).addClass("NailDownLeft");
-        } else if (data["canDownSlash"] && !data["canSideslashLeft"] && data["canSideslashRight"] && !data["canUpslash"]) { //down right slash
+        } else if (data["canDownslash"] && !data["canSideslashLeft"] && data["canSideslashRight"] && !data["canUpslash"]) { //down right slash
             $(id).removeClass("NailDown");
             $(id).removeClass("NailDownLeft");
             $(id).removeClass("NailDownUp");
@@ -1324,7 +1324,7 @@ $(document).ready(function () {
             $(id).removeClass("NailDownLeftRight");
             $(id).removeClass("NailDownUpRight");
             $(id).addClass("NailDownRight");
-        } else if (data["canDownSlash"] && !data["canSideslashLeft"] && !data["canSideslashRight"] && data["canUpslash"]) { //down up slash
+        } else if (data["canDownslash"] && !data["canSideslashLeft"] && !data["canSideslashRight"] && data["canUpslash"]) { //down up slash
             $(id).removeClass("NailDown");
             $(id).removeClass("NailDownLeft");
             $(id).removeClass("NailDownRight");
@@ -1332,7 +1332,7 @@ $(document).ready(function () {
             $(id).removeClass("NailDownLeftRight");
             $(id).removeClass("NailDownUpRight");
             $(id).addClass("NailDownUp");
-        } else if (data["canDownSlash"] && data["canSideslashLeft"] && data["canSideslashRight"] && !data["canUpslash"]) { //down left right slash
+        } else if (data["canDownslash"] && data["canSideslashLeft"] && data["canSideslashRight"] && !data["canUpslash"]) { //down left right slash
             $(id).removeClass("NailDown");
             $(id).removeClass("NailDownLeft");
             $(id).removeClass("NailDownUp");
@@ -1340,7 +1340,7 @@ $(document).ready(function () {
             $(id).removeClass("NailDownLeftUP");
             $(id).removeClass("NailDownUpRight");
             $(id).addClass("NailDownLeftRight");
-        } else if (data["canDownSlash"] && data["canSideslashLeft"] && !data["canSideslashRight"] && data["canUpslash"]) { //down left up slash
+        } else if (data["canDownslash"] && data["canSideslashLeft"] && !data["canSideslashRight"] && data["canUpslash"]) { //down left up slash
             $(id).removeClass("NailDown");
             $(id).removeClass("NailDownLeft");
             $(id).removeClass("NailDownUp");
@@ -1348,7 +1348,7 @@ $(document).ready(function () {
             $(id).removeClass("NailDownLeftRight");
             $(id).removeClass("NailDownUpRight");
             $(id).addClass("NailDownLeftUP");
-        } else if (data["canDownSlash"] && !data["canSideslashLeft"] && data["canSideslashRight"] && data["canUpslash"]) { //down Right Up slash
+        } else if (data["canDownslash"] && !data["canSideslashLeft"] && data["canSideslashRight"] && data["canUpslash"]) { //down Right Up slash
             $(id).removeClass("NailDown");
             $(id).removeClass("NailDownLeft");
             $(id).removeClass("NailDownUp");

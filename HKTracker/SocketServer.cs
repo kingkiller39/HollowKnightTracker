@@ -150,7 +150,7 @@ namespace HKTracker
         }
         public void GetRandom()
         {
-            if (Modding.ModHooks.GetMod("RandomizerMod", false, false) is not Mod)
+            if (Modding.ModHooks.GetMod("Randomizer 4", false, false) is not Mod)
             {
                 SendMessage("canFocus", "true");
                 SendMessage("swim", "true");
