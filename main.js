@@ -1132,9 +1132,9 @@ $(document).ready(function () {
 
                         case "skill":
                             if (data["version"].startsWith("1.4")) {
-                                doSkillv14(name, id);
+                                doSkillv14(name, id, item);
                             } else if (data["version"].startsWith("1.5")) {
-                                doSkillsv15(name, id);
+                                doSkillsv15(name, id, item);
                             }
                             break;
 
@@ -1358,7 +1358,7 @@ $(document).ready(function () {
             $(id).addClass("NailDownUpRight");
         }
     }
-    function doSkillv14(name, id) {
+    function doSkillv14(name, id, item) {
         if (name == "hasDash" && !data["canDashLeft"] && !data["canDashRight"]) { //no split dash
             setSelected(data[name], id);
             return;
@@ -1439,7 +1439,7 @@ $(document).ready(function () {
         return;
 
     }
-    function doSkillsv15(name, id) {
+    function doSkillsv15(name, id, item) {
         if (name == "hasDash" && data[name]) {
             if (BorderGlowModern()) {
                 $(id).css("filter", "");
