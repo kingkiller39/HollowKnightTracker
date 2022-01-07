@@ -1012,6 +1012,7 @@ $(document).ready(function () {
         data["elevatorPass"] = false;
         data["DuplicateDreamer"] = false;
         data["canFocus"] = false;
+        data["version"] = "1";
         hasAppliedDS = false;
         hasAppliedUS = false;
         hasAppliedLS = false;
