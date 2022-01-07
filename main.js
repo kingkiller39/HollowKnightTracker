@@ -1485,7 +1485,7 @@ $(document).ready(function () {
             }
             setSelected(data[name], id);
             return;
-        } else if (name == "canDashLeft" && data[name]) {
+        } else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) {
             if (BorderGlowModern()) {
                 $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
             } else {
@@ -1493,7 +1493,7 @@ $(document).ready(function () {
                 $(id).addClass("LeftItem");
             }
             return;
-        } else if (name == "canDashRight" && data[name]) {
+        } else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) {
             if (BorderGlowModern()) {
                 $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
 
@@ -1504,7 +1504,7 @@ $(document).ready(function () {
             return;
         }
 
-        if ((name == "hasWalljump" || name == "canWallJump") && data[name]) {
+        if (name == "hasWalljump" && data[name]) {
             if (BorderGlowModern()) {
                 $(id).css("filter", "");
             } else {
@@ -1514,7 +1514,7 @@ $(document).ready(function () {
             }
             setSelected(data[name], id);
             return;
-        } else if (name == "hasWalljumpLeft" && data[name]) {
+        } else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
                 $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
             } else {
@@ -1522,7 +1522,7 @@ $(document).ready(function () {
                 $(id).addClass("LeftItem");
             }
             return;
-        } else if (name == "hasWalljumpRight" && data[name]) {
+        } else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
                 $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
             } else {
@@ -1542,7 +1542,7 @@ $(document).ready(function () {
             }
             setSelected(data[name], id);
             return;
-        } else if (name == "hasSuperdashLeft" && data[name]) {
+        } else if (name == "hasSuperDash" && data["hasSuperdashLeft"] && !data["hasSuperdashRight"]) {
             if (BorderGlowModern()) {
                 console.log("need to do cdash left");
             } else {
@@ -1550,7 +1550,7 @@ $(document).ready(function () {
                 $(id).addClass("LeftItem");
             }
             return;
-        } else if (name == "hasSuperdashRight" && data[name]) {
+        } else if (name == "hasSuperDash" && !data["hasSuperdashLeft"] && data["hasSuperdashRight"]) {
             if (BorderGlowModern()) {
                 console.log("need to do cdash right");
             } else {

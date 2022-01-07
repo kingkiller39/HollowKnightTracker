@@ -17,6 +17,14 @@ namespace HKTracker
 
         private static readonly HashSet<string> IntKeysToSend = new HashSet<string> { "simpleKeys", "nailDamage", "maxHealth", "MPReserveMax", "ore", "rancidEggs", "grubsCollected", "charmSlotsFilled", "charmSlots", "flamesCollected", "guardiansDefeated" };
         private bool randoAtBench { get; set; }
+        public static string seed = "";
+        public static bool RandomizeSwim = false;
+        public static bool RandomizeElevatorPass = false;
+        public static bool RandomizeFocus = false;
+        public static bool RandomizeNail = false;
+        public static bool RandomizeSplitDash = false;
+        public static bool RandomizeSplitClaw = false;
+        public static bool RandomizeCDash = false;
         public static readonly string RandoTrackLogFile = Path.Combine(Application.persistentDataPath, "Randomizer 4", "Recent", "TrackerLog.txt");
         public void Broadcast(string s)
         {
@@ -38,6 +46,13 @@ namespace HKTracker
                 case "json":
                     Send(GetJson());
                     GetRandom();
+                    getSwim();
+                    getEPass();
+                    getFocus();
+                    GetNail();
+                    GetDash();
+                    GetClaw();
+                    getCDash();
                     break;
                 default:
                     if (e.Data.Contains('|'))
@@ -98,12 +113,14 @@ namespace HKTracker
             if (State != WebSocketState.Open) return;
             HKTracker.Instance.LogDebug("Loaded Save");
             //GetRandom();
+            GetRandoSettings();
             SendMessage("SaveLoaded", "true");
         }
         public void LoadSave()
         {
             if (State != WebSocketState.Open) return;
             //GetRandom();
+            GetRandoSettings();
             SendMessage("SaveLoaded", "true");
         }
 
@@ -148,90 +165,290 @@ namespace HKTracker
             string json = JsonUtility.ToJson(playerData);
             return json;
         }
+
+        public void getSwim()
+        {
+            if (!RandomizeSwim) { SendMessage("swim", "true"); }
+            else { SendMessage("swim", System.Convert.ToString(CheckForItem(@"{Swim}"))); }
+        }
+
+        public void getEPass()
+        {
+            if (!RandomizeElevatorPass) { SendMessage("elevatorPass", "true"); }
+            else { SendMessage("Elevator_Pass", System.Convert.ToString(CheckForItem(@"{Elevator_Pass}"))); }
+        }
+
+        public void getFocus()
+        {
+            if (!RandomizeFocus) { SendMessage("canFocus", "true"); }
+            else { SendMessage("Focus", System.Convert.ToString(CheckForItem(@"{Focus}"))); }
+        }
+
+        public void GetNail()
+        {
+            if (!RandomizeNail) { SendMessage("FullNail", "true"); }
+            else
+            {
+                string[] nail = CheckForItem(@"{Rightslash}", @"{Upslash}", @"{Leftslash}");
+                SendMessage("canSideslashRight", nail[0]);
+                SendMessage("canUpslash", nail[1]);
+                SendMessage("canSideslashLeft", nail[2]);
+            }
+        }
+
+        public void GetDash()
+        {
+            if (!RandomizeSplitDash || PlayerData.instance.GetBool("hasDash")) { return; }
+            else
+            {
+                string[] dash = CheckForItem(@"{Left_Mothwing_Cloak}", @"{Right_Mothwing_Cloak}");
+                SendMessage("canDashLeft", dash[0]);
+                SendMessage("canDashRight", dash[1]);
+            }
+        }
+
+        public void GetClaw()
+        {
+            if (!RandomizeSplitClaw || PlayerData.instance.GetBool("hasWalljump")) { return; }
+            else
+            {
+                string[] claw = CheckForItem(@"{Left_Mantis_Claw}", @"{Right_Mantis_Claw}");
+                SendMessage("hasWalljumpLeft", claw[0]);
+                SendMessage("hasWalljumpRight", claw[1]);
+            }
+        }
+
+        public void getCDash()
+        {
+            if (!RandomizeCDash || PlayerData.instance.GetBool("hasSuperDash")) { return; }
+            else
+            {
+                string[] cdash = CheckForItem(@"{Right_Crystal_Heart}", @"{Left_Crystal_Heart}");
+                SendMessage("hasSuperdashRight", cdash[0]);
+                SendMessage("hasSuperdashLeft", cdash[1]);
+            }
+        }
+
+        public bool CheckForItem(string name)
+        {
+            if (File.Exists(RandoTrackLogFile))
+            {
+                using (FileStream fs = new FileStream(RandoTrackLogFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var reader = new StreamReader(fs))
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            var line = reader.ReadLine();
+                            if (line.Contains(name)) { return true; }
+                        }
+                    }
+                }
+            }
+            return false;
+        }
+
+        public string[] CheckForItem(string name1, string name2)
+        {
+            bool found1 = false;
+            bool found2 = false;
+            string[] FoundString = new string[] { "false", "false" };
+            if (File.Exists(RandoTrackLogFile))
+            {
+                using (FileStream fs = new FileStream(RandoTrackLogFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var reader = new StreamReader(fs))
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            var line = reader.ReadLine();
+                            if (line.Contains(name1))
+                            {
+                                found1 = true;
+                                FoundString[0] = "true";
+                            }
+                            else if (line.Contains(name2))
+                            {
+                                found2 = true;
+                                FoundString[1] = "true";
+                            }
+                            if (found1 && found2) { return FoundString; }
+                        }
+                    }
+                }
+            }
+            return FoundString;
+        }
+
+        public string[] CheckForItem(string name1, string name2, string name3)
+        {
+            bool found1 = false;
+            bool found2 = false;
+            bool found3 = false;
+            string[] FoundString = new string[] { "false", "false", "false" };
+            if (File.Exists(RandoTrackLogFile))
+            {
+                using (FileStream fs = new FileStream(RandoTrackLogFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var reader = new StreamReader(fs))
+                    {
+                        while (!reader.EndOfStream)
+                        {
+                            var line = reader.ReadLine();
+                            if (line.Contains(name1))
+                            {
+                                found1 = true;
+                                FoundString[0] = "true";
+                            }
+                            else if (line.Contains(name2))
+                            {
+                                found2 = true;
+                                FoundString[1] = "true";
+                            }
+                            else if (line.Contains(name3))
+                            {
+                                found3 = true;
+                                FoundString[2] = "true";
+                            }
+                            if (found1 && found2 && found3) { return FoundString; }
+                        }
+                    }
+                }
+            }
+            return FoundString;
+        }
+
+        public static void GetRandoSettings()
+        {
+            seed = "";
+            RandomizeSwim = false;
+            RandomizeElevatorPass = false;
+            RandomizeFocus = false;
+            RandomizeNail = false;
+            RandomizeSplitDash = false;
+            RandomizeSplitClaw = false;
+            RandomizeCDash = false;
+
+            if (File.Exists(RandoTrackLogFile))
+            {
+                using (FileStream fs = new FileStream(RandoTrackLogFile, FileMode.Open, FileAccess.Read, FileShare.ReadWrite))
+                {
+                    using (var reader = new StreamReader(fs))
+                    {
+                        bool foundSeed = false;
+                        bool foundRandomizeSwim = false;
+                        bool foundRandomizeElevatorPass = false;
+                        bool foundRandomizeNail = false;
+                        bool foundRandomizeFocus = false;
+                        bool foundRandomizeSplitDash = false;
+                        bool foundRandomizeSplitClaw = false;
+                        bool foundRandomizeCDash = false;
+                        string temp;
+                        while (!reader.EndOfStream)
+                        {
+                            var line = reader.ReadLine();
+                            if (line.Trim().StartsWith("\"Seed\""))
+                            {
+                                seed = line.Split(':')[1].Trim();
+                                if (seed.Contains(','))
+                                {
+                                    seed = seed.Remove(seed.Length - 1, 1);
+                                }
+                                foundSeed = true;
+                            }
+                            else if (line.Trim().StartsWith("\"RandomizeSwim\""))
+                            {
+                                temp = line.Split(':')[1].Trim();
+                                if (temp.Contains(','))
+                                {
+                                    temp = temp.Remove(temp.Length - 1, 1);
+                                }
+                                RandomizeSwim = System.Convert.ToBoolean(temp);
+                                foundRandomizeSwim = true;
+                            }
+                            else if (line.Trim().StartsWith("\"RandomizeElevatorPass\""))
+                            {
+                                temp = line.Split(':')[1].Trim();
+                                if (temp.Contains(','))
+                                {
+                                    temp = temp.Remove(temp.Length - 1, 1);
+                                }
+                                RandomizeElevatorPass = System.Convert.ToBoolean(temp);
+                                foundRandomizeElevatorPass = true;
+                            }
+                            else if (line.Trim().StartsWith("\"RandomizeNail\""))
+                            {
+                                temp = line.Split(':')[1].Trim();
+                                if (temp.Contains(','))
+                                {
+                                    temp = temp.Remove(temp.Length - 1, 1);
+                                }
+                                RandomizeNail = System.Convert.ToBoolean(temp);
+                                foundRandomizeNail = true;
+                            }
+                            else if (line.Trim().StartsWith("\"RandomizeFocus\""))
+                            {
+                                temp = line.Split(':')[1].Trim();
+                                if (temp.Contains(','))
+                                {
+                                    temp = temp.Remove(temp.Length - 1, 1);
+                                }
+                                RandomizeFocus = System.Convert.ToBoolean(temp);
+                                foundRandomizeFocus = true;
+                            }
+                            else if (line.Trim().StartsWith("\"SplitCloak\""))
+                            {
+                                temp = line.Split(':')[1].Trim();
+                                if (temp.Contains(','))
+                                {
+                                    temp = temp.Remove(temp.Length - 1, 1);
+                                }
+                                RandomizeSplitDash = System.Convert.ToBoolean(temp);
+                                foundRandomizeSplitDash = true;
+                            }
+                            else if (line.Trim().StartsWith("\"SplitClaw\""))
+                            {
+                                temp = line.Split(':')[1].Trim();
+                                if (temp.Contains(','))
+                                {
+                                    temp = temp.Remove(temp.Length - 1, 1);
+                                }
+                                RandomizeSplitClaw = System.Convert.ToBoolean(temp);
+                                foundRandomizeSplitClaw = true;
+                            }
+                            else if (line.Trim().StartsWith("\"SplitSuperdash\""))
+                            {
+                                temp = line.Split(':')[1].Trim();
+                                if (temp.Contains(','))
+                                {
+                                    temp = temp.Remove(temp.Length - 1, 1);
+                                }
+                                RandomizeCDash = System.Convert.ToBoolean(temp);
+                                foundRandomizeCDash = true;
+                            }
+                            if (foundSeed && foundRandomizeSwim && foundRandomizeElevatorPass && foundRandomizeNail && foundRandomizeFocus && foundRandomizeSplitDash && foundRandomizeSplitClaw && foundRandomizeCDash)
+                            {
+                                break;
+                            }
+                        }
+                    }
+                }
+            }
+        }
         public void GetRandom()
         {
             if (Modding.ModHooks.GetMod("Randomizer 4", false, false) is not Mod)
             {
+                seed = "";
+                RandomizeSwim = false;
+                RandomizeElevatorPass = false;
+                RandomizeFocus = false;
+                RandomizeNail = false;
                 SendMessage("canFocus", "true");
                 SendMessage("swim", "true");
                 SendMessage("elevatorPass", "true");
                 SendMessage("FullNail", "true");
                 return;
-            }
-            string seed = "";
-            bool RandomizeSwim = false;
-            bool RandomizeElevatorPass = false;
-            bool RandomizeFocus = false;
-            bool RandomizeNail = false;
-
-            if (File.Exists(RandoTrackLogFile))
-            {
-                using (var reader = new StreamReader(RandoTrackLogFile))
-                {
-                    bool foundSeed = false;
-                    bool foundRandomizeSwim = false;
-                    bool foundRandomizeElevatorPass = false;
-                    bool foundRandomizeNail = false;
-                    bool foundRandomizeFocus = false;
-                    string temp;
-                    while(!reader.EndOfStream)
-                    {
-                        var line = reader.ReadLine();
-                        if (line.Trim().StartsWith("\"Seed\""))
-                        {
-                            seed = line.Split(':')[1].Trim();
-                            if (seed.Contains(','))
-                            {
-                                seed = seed.Remove(seed.Length - 1, 1);
-                            }
-                            foundSeed = true;
-                        }
-                        else if (line.Trim().StartsWith("\"RandomizeSwim\""))
-                        {
-                            temp = line.Split(':')[1].Trim();
-                            if (temp.Contains(','))
-                            {
-                                temp = temp.Remove(temp.Length - 1, 1);
-                            }
-                            RandomizeSwim = System.Convert.ToBoolean(temp);
-                            foundRandomizeSwim = true;
-                        }
-                        else if (line.Trim().StartsWith("\"RandomizeElevatorPass\""))
-                        {
-                            temp = line.Split(':')[1].Trim();
-                            if (temp.Contains(','))
-                            {
-                                temp = temp.Remove(temp.Length - 1, 1);
-                            }
-                            RandomizeElevatorPass = System.Convert.ToBoolean(temp);
-                            foundRandomizeElevatorPass = true;
-                        }
-                        else if (line.Trim().StartsWith("\"RandomizeNail\""))
-                        {
-                            temp = line.Split(':')[1].Trim();
-                            if (temp.Contains(','))
-                            {
-                                temp = temp.Remove(temp.Length - 1, 1);
-                            }
-                            RandomizeNail = System.Convert.ToBoolean(temp);
-                            foundRandomizeNail = true;
-                        }
-                        else if (line.Trim().StartsWith("\"RandomizeFocus\""))
-                        {
-                            temp = line.Split(':')[1].Trim();
-                            if (temp.Contains(','))
-                            {
-                                temp = temp.Remove(temp.Length - 1, 1);
-                            }
-                            RandomizeFocus = System.Convert.ToBoolean(temp);
-                            foundRandomizeFocus = true;
-                        }
-                        if (foundSeed && foundRandomizeSwim && foundRandomizeElevatorPass && foundRandomizeNail && foundRandomizeFocus)
-                        {
-                            break;
-                        }
-                    }
-                }
             }
             SendMessage("seed", seed);
             if (!RandomizeSwim) { SendMessage("swim", "true"); }
@@ -253,6 +470,7 @@ namespace HKTracker
             if (State != WebSocketState.Open) return;
             HKTracker.Instance.LogDebug("Loaded New Save");
             //GetRandom();
+            GetRandoSettings();
             SendMessage("NewSave", "true");
         }
 
@@ -261,6 +479,7 @@ namespace HKTracker
             orig(self);
             if (State != WebSocketState.Open) return;
             //GetRandom();
+            GetRandoSettings();
             SendMessage("NewSave", "true");
         }
 
