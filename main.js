@@ -1131,89 +1131,23 @@ $(document).ready(function () {
                             break;
 
                         case "skill":
-
-                            if (name == "hasDash" && !data["canDashLeft"] && !data["canDashRight"]) { //no split dash
-                                setSelected(data[name], id);
-                                break;
-                            }
-                            else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) { //can dash left
-                                if (BorderGlowModern()) {
-                                    $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
-                                } else {
-                                    $(id).removeClass("container");
-                                    $(id).addClass("LeftItem");
-                                }
-                                break;
-                            }
-                            else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) { //can dash right
-                                if (BorderGlowModern()) {
-                                    $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
-                                    
-                                } else {
-                                    $(id).removeClass("container");
-                                    $(id).addClass("RightItem");
-                                }
-                                break;
-                            }
-                            else if (name == "hasDash" && data["canDashLeft"] && data["canDashRight"]) { //can dash left and right
-                                if (BorderGlowModern()) {
-                                    $(id).css("filter", "");
-                                } else {
-                                    $(id).removeClass("LeftItem");
-                                    $(id).removeClass("RightItem");
-                                    $(id).addClass("container");
-                                }
-                                setSelected(data[name], id);
-                                break;
-                            }
-
-                            if (name == "hasWalljump" && !data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
-                                setSelected(data[name], id);
-                                break;
-                            }
-                            else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
-                                if (BorderGlowModern()) {
-                                    console.log("applying left claw");
-                                    $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
-                                } else {
-                                    $(id).removeClass("container");
-                                    $(id).addClass("LeftItem");
-                                }
-                                break;
-                            }
-                            else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
-                                if (BorderGlowModern()) {
-                                    $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
-                                } else {
-                                    $(id).removeClass("container");
-                                    $(id).addClass("RightItem");
-                                }
-                                break;
-                            }
-                            else if (name == "hasWalljump" && data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
-                                if (BorderGlowModern) {
-                                    $(id).css("filter", "");
-                                } else {
-                                    $(id).removeClass("LeftItem");
-                                    $(id).removeClass("RightItem");
-                                    $(id).addClass("container");
-                                }
-                                setSelected(data[name], id);
-                                break;
-                            }
-
-
-                            setSelected(data[name], id);
-                            if ("levelSprites" in item && data["hasDash"] && !data["hasShadowDash"]) {
-                                img.attr("src", "images/" + entities["hasDash"].levelSprites[0]);
-                            }
-                            else if ("levelSprites" in item && data["hasDash"] && data["hasShadowDash"]) {
-                                img.attr("src", "images/" + entities["hasDash"].levelSprites[1]);
+                            if (data["version"].startsWith("1.4")) {
+                                doSkillv14(name, id);
+                            } else if (data["version"].startsWith("1.5")) {
+                                doSkillsv15(name, id);
                             }
                             break;
 
                         case "item":
-
+                            if (name == "nail" && data["version"].startsWith("1.4")) {
+                                handleCursedNailv14();
+                            } else if (name == "nail" && data["version"].startsWith("1.5")) {
+                                handleCursedNailv15(name, id);
+                            }
+                            if (name == "elevatorPass" && data["hasElevatorPass"]) {
+                                data[name] = true;
+                                setSelected(data[name], id);
+                            }
 
                             if (name == "nailSmithUpgrades") {
                                 if (data["nailSmithUpgrades"] > 0) {
@@ -1254,6 +1188,12 @@ $(document).ready(function () {
                             }
                             break;
                         case "generic":
+                            if (name == "DuplicateDreamer") {
+                                var n = ((data["maskBrokenHegemol"] == true) ? 1 : 0) + ((data["maskBrokenMonomon"] == true) ? 1 : 0) + ((data["maskBrokenLurien"] == true) ? 1 : 0);
+                                if (n < data["guardiansDefeated"]) {
+                                    data[name] = true;
+                                }
+                            }
                             setSelected(data[name], id);
                             if ("levelSprites" in item && data["hasDreamNail"] && !data["dreamNailUpgraded"]) {
                                 img.attr("src", "images/" + entities["hasDreamNail"].levelSprites[0]);
@@ -1289,7 +1229,7 @@ $(document).ready(function () {
 
         updateVisible();
     }
-    function handleCursedNail() {
+    function handleCursedNailv14() {
         if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
             document.getElementById("nail").style.filter = "grayscale(0%)";
         }
@@ -1346,8 +1286,262 @@ $(document).ready(function () {
             $("#nail" + '_count').hide();
         }
     }
+
+    function handleCursedNailv15(name, id) {
+        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
+            document.getElementById("nail").style.filter = "grayscale(0%)";
+        }
+        if (data["FullNail"] || (data["canDownslash"] && data["canSideslashLeft"] && data["canSideslashRight"] && data["canUpslash"])) { //All slashes
+            $(id).removeClass("NailDown");
+            $(id).removeClass("NailDownLeft");
+            $(id).removeClass("NailDownUp");
+            $(id).removeClass("NailDownRight");
+            $(id).removeClass("NailDownLeftUP");
+            $(id).removeClass("NailDownLeftRight");
+            $(id).removeClass("NailDownUpRight");
+            $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
+        } else if (data["canDownSlash"] && !data["canSideslashLeft"] && !data["canSideslashRight"] && !data["canUpslash"]) { //down slash
+            $(id).removeClass("NailDownLeft");
+            $(id).removeClass("NailDownUp");
+            $(id).removeClass("NailDownRight");
+            $(id).removeClass("NailDownLeftUP");
+            $(id).removeClass("NailDownLeftRight");
+            $(id).removeClass("NailDownUpRight");
+            $(id).addClass("NailDown");
+        } else if (data["canDownSlash"] && data["canSideslashLeft"] && !data["canSideslashRight"] && !data["canUpslash"]) { // down left slash
+            $(id).removeClass("NailDown");
+            $(id).removeClass("NailDownUp");
+            $(id).removeClass("NailDownRight");
+            $(id).removeClass("NailDownLeftUP");
+            $(id).removeClass("NailDownLeftRight");
+            $(id).removeClass("NailDownUpRight");
+            $(id).addClass("NailDownLeft");
+        } else if (data["canDownSlash"] && !data["canSideslashLeft"] && data["canSideslashRight"] && !data["canUpslash"]) { //down right slash
+            $(id).removeClass("NailDown");
+            $(id).removeClass("NailDownLeft");
+            $(id).removeClass("NailDownUp");
+            $(id).removeClass("NailDownLeftUP");
+            $(id).removeClass("NailDownLeftRight");
+            $(id).removeClass("NailDownUpRight");
+            $(id).addClass("NailDownRight");
+        } else if (data["canDownSlash"] && !data["canSideslashLeft"] && !data["canSideslashRight"] && data["canUpslash"]) { //down up slash
+            $(id).removeClass("NailDown");
+            $(id).removeClass("NailDownLeft");
+            $(id).removeClass("NailDownRight");
+            $(id).removeClass("NailDownLeftUP");
+            $(id).removeClass("NailDownLeftRight");
+            $(id).removeClass("NailDownUpRight");
+            $(id).addClass("NailDownUp");
+        } else if (data["canDownSlash"] && data["canSideslashLeft"] && data["canSideslashRight"] && !data["canUpslash"]) { //down left right slash
+            $(id).removeClass("NailDown");
+            $(id).removeClass("NailDownLeft");
+            $(id).removeClass("NailDownUp");
+            $(id).removeClass("NailDownRight");
+            $(id).removeClass("NailDownLeftUP");
+            $(id).removeClass("NailDownUpRight");
+            $(id).addClass("NailDownLeftRight");
+        } else if (data["canDownSlash"] && data["canSideslashLeft"] && !data["canSideslashRight"] && data["canUpslash"]) { //down left up slash
+            $(id).removeClass("NailDown");
+            $(id).removeClass("NailDownLeft");
+            $(id).removeClass("NailDownUp");
+            $(id).removeClass("NailDownRight");
+            $(id).removeClass("NailDownLeftRight");
+            $(id).removeClass("NailDownUpRight");
+            $(id).addClass("NailDownLeftUP");
+        } else if (data["canDownSlash"] && !data["canSideslashLeft"] && data["canSideslashRight"] && data["canUpslash"]) { //down Right Up slash
+            $(id).removeClass("NailDown");
+            $(id).removeClass("NailDownLeft");
+            $(id).removeClass("NailDownUp");
+            $(id).removeClass("NailDownRight");
+            $(id).removeClass("NailDownLeftUP");
+            $(id).removeClass("NailDownLeftRight");
+            $(id).addClass("NailDownUpRight");
+        }
+    }
+    function doSkillv14(name, id) {
+        if (name == "hasDash" && !data["canDashLeft"] && !data["canDashRight"]) { //no split dash
+            setSelected(data[name], id);
+            return;
+        }
+        else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) { //can dash left
+            if (BorderGlowModern()) {
+                $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("LeftItem");
+            }
+            return;
+        }
+        else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) { //can dash right
+            if (BorderGlowModern()) {
+                $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
+
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("RightItem");
+            }
+            return;
+        }
+        else if (name == "hasDash" && data["canDashLeft"] && data["canDashRight"]) { //can dash left and right
+            if (BorderGlowModern()) {
+                $(id).css("filter", "");
+            } else {
+                $(id).removeClass("LeftItem");
+                $(id).removeClass("RightItem");
+                $(id).addClass("container");
+            }
+            setSelected(data[name], id);
+            return;
+        }
+
+        if (name == "hasWalljump" && !data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
+            setSelected(data[name], id);
+            return;
+        }
+        else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
+            if (BorderGlowModern()) {
+                console.log("applying left claw");
+                $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("LeftItem");
+            }
+            return;
+        }
+        else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
+            if (BorderGlowModern()) {
+                $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("RightItem");
+            }
+            return;
+        }
+        else if (name == "hasWalljump" && data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
+            if (BorderGlowModern()) {
+                $(id).css("filter", "");
+            } else {
+                $(id).removeClass("LeftItem");
+                $(id).removeClass("RightItem");
+                $(id).addClass("container");
+            }
+            setSelected(data[name], id);
+            return;
+        }
+
+        setSelected(data[name], id);
+        if ("levelSprites" in item && data["hasDash"] && !data["hasShadowDash"]) {
+            img.attr("src", "images/" + entities["hasDash"].levelSprites[0]);
+        }
+        else if ("levelSprites" in item && data["hasDash"] && data["hasShadowDash"]) {
+            img.attr("src", "images/" + entities["hasDash"].levelSprites[1]);
+        }
+        return;
+
+    }
+    function doSkillsv15(name, id) {
+        if (name == "hasDash" && data[name]) {
+            if (BorderGlowModern()) {
+                $(id).css("filter", "");
+            } else {
+                $(id).removeClass("LeftItem");
+                $(id).removeClass("RightItem");
+                $(id).addClass("container");
+            }
+            setSelected(data[name], id);
+            return;
+        } else if (name == "canDashLeft" && data[name]) {
+            if (BorderGlowModern()) {
+                $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("LeftItem");
+            }
+            return;
+        } else if (name == "canDashRight" && data[name]) {
+            if (BorderGlowModern()) {
+                $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
+
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("RightItem");
+            }
+            return;
+        }
+
+        if ((name == "hasWalljump" || name == "canWallJump") && data[name]) {
+            if (BorderGlowModern()) {
+                $(id).css("filter", "");
+            } else {
+                $(id).removeClass("LeftItem");
+                $(id).removeClass("RightItem");
+                $(id).addClass("container");
+            }
+            setSelected(data[name], id);
+            return;
+        } else if (name == "hasWalljumpLeft" && data[name]) {
+            if (BorderGlowModern()) {
+                $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("LeftItem");
+            }
+            return;
+        } else if (name == "hasWalljumpRight" && data[name]) {
+            if (BorderGlowModern()) {
+                $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("RightItem");
+            }
+            return;
+        }
+
+        if (name == "hasSuperDash" && data[name]) {
+            if (BorderGlowModern()) {
+                $(id).css("filter", "");
+            } else {
+                $(id).removeClass("LeftItem");
+                $(id).removeClass("RightItem");
+                $(id).addClass("container");
+            }
+            setSelected(data[name], id);
+            return;
+        } else if (name == "hasSuperdashLeft" && data[name]) {
+            if (BorderGlowModern()) {
+                console.log("need to do cdash left");
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("LeftItem");
+            }
+            return;
+        } else if (name == "hasSuperdashRight" && data[name]) {
+            if (BorderGlowModern()) {
+                console.log("need to do cdash right");
+            } else {
+                $(id).removeClass("container");
+                $(id).addClass("RightItem");
+            }
+            return;
+        }
+
+        if (name == "swim" && data["canSwim"]) {
+            data[name] = true;
+            setSelected(data[name], id);
+        }
+
+        setSelected(data[name], id);
+        if ("levelSprites" in item && data["hasDash"] && !data["hasShadowDash"]) {
+            img.attr("src", "images/" + entities["hasDash"].levelSprites[0]);
+        }
+        else if ("levelSprites" in item && data["hasDash"] && data["hasShadowDash"]) {
+            img.attr("src", "images/" + entities["hasDash"].levelSprites[1]);
+        }
+        return;
+
+    }
+
     function updateVisible() {
-        handleCursedNail();
         $('.hideIfSet > div.itemDiv:not(:has(>.selected)):not(:has(>.multiple))').hide();
         $('.container:not(.hideIfSet) div.itemDiv').css("display", "block");
         $('.container.hideIfSet div.itemDiv:has(>.selected)').css("display", "block");
