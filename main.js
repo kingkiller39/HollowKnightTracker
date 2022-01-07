@@ -1002,11 +1002,16 @@ $(document).ready(function () {
         $(".gaveItem").css("filter", "");
         $(".charmDiv > .selected").css("filter", "");
         $(".charmDiv > .equipped").css("");
+        data["nail"] = false;
         data["FullNail"] = false;
         data["canDownslash"] = false;
         data["canSideslashLeft"] = false;
         data["canSideslashRight"] = false;
         data["canUpslash"] = false;
+        data["swim"] = false;
+        data["elevatorPass"] = false;
+        data["DuplicateDreamer"] = false;
+        data["canFocus"] = false;
         hasAppliedDS = false;
         hasAppliedUS = false;
         hasAppliedLS = false;
