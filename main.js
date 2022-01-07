@@ -1199,7 +1199,7 @@ $(document).ready(function () {
                                 } else {
                                     setSelected(data[name], id);
                                 }
-                            else {
+                            else if (name !== "nail"){
                                 setMultipleSelected(data[name] > 0, id);
                                 if (data[name] > 0) {
                                     $(id + '_count').html(data[name]).show();
@@ -1334,7 +1334,7 @@ $(document).ready(function () {
             $(id).removeClass("NailDownLeftUP");
             $(id).removeClass("NailDownLeftRight");
             $(id).removeClass("NailDownUpRight");
-            $("#nail").addClass('multiple').parent().removeClass('hideIfSet');
+            $(id).addClass('multiple').parent().removeClass('hideIfSet');
         } else if (data["canDownslash"] && !data["canSideslashLeft"] && !data["canSideslashRight"] && !data["canUpslash"]) { //down slash
             $(id).removeClass("NailDownLeft");
             $(id).removeClass("NailDownUp");

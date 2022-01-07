@@ -175,13 +175,14 @@ namespace HKTracker
         public void getEPass()
         {
             if (!RandomizeElevatorPass) { SendMessage("elevatorPass", "true"); }
-            else { SendMessage("Elevator_Pass", System.Convert.ToString(CheckForItem(@"{Elevator_Pass}"))); }
+            else { SendMessage("elevatorPass", System.Convert.ToString(CheckForItem(@"{Elevator_Pass}"))); }
         }
 
         public void getFocus()
         {
+            
             if (!RandomizeFocus) { SendMessage("canFocus", "true"); }
-            else { SendMessage("Focus", System.Convert.ToString(CheckForItem(@"{Focus}"))); }
+            else { SendMessage("canFocus", System.Convert.ToString(CheckForItem(@"{Focus}"))); }
         }
 
         public void GetNail()
