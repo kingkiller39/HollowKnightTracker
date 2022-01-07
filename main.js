@@ -1013,6 +1013,12 @@ $(document).ready(function () {
         data["DuplicateDreamer"] = false;
         data["canFocus"] = false;
         data["version"] = "1";
+        data["canDashRight"] = false;
+        data["canDashLeft"] = false;
+        data["hasSuperdashRight"] = false;
+        data["hasSuperdashLeft"] = false;
+        data["hasWalljumpRight"] = false;
+        data["hasWalljumpLeft"] = false;
         hasAppliedDS = false;
         hasAppliedUS = false;
         hasAppliedLS = false;
@@ -1064,6 +1070,13 @@ $(document).ready(function () {
                 if (data["DuplicateDreamer"] == undefined) { data["DuplicateDreamer"] = false; }
                 if (data["canFocus"] == undefined) { data["canFocus"] = false; }
                 if (data["version"] == undefined) { data["version"] = "1"; }
+                if (data["canDashRight"] == undefined) { data["canDashRight"] = false; }
+                if (data["canDashLeft"] == undefined) { data["canDashLeft"] = false; }
+                if (data["hasSuperdashRight"] == undefined) { data["hasSuperdashRight"] = false; }
+                if (data["hasSuperdashLeft"] == undefined) { data["hasSuperdashLeft"] = false; }
+                if (data["hasWalljumpRight"] == undefined) { data["hasWalljumpRight"] = false; }
+                if (data["hasWalljumpLeft"] == undefined) { data["hasWalljumpLeft"] = false; }
+
             }
         }
 
