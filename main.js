@@ -1000,6 +1000,8 @@ $(document).ready(function () {
         $(".selected").css("filter", "");
         $(".selected").css("filter", "");
         $(".gaveItem").css("filter", "");
+        $(".LeftItem").removeClass("LeftItem");
+        $(".RightItem").removeClass("RightItem");
         $(".charmDiv > .selected").css("filter", "");
         $(".charmDiv > .equipped").css("");
         data["nail"] = false;

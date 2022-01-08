@@ -166,23 +166,41 @@ namespace HKTracker
             return json;
         }
 
+        public void CheckPD()
+        {
+            PlayerData PD = PlayerData.instance;
+            HKTracker hK = HKTracker.Instance;
+            hK.Log("swim: " + (PD.GetBool("canSwim") || PD.GetBool("Swim")));
+            hK.Log("epass: " + (PD.GetBool("hasElevatorPass") || PD.GetBool("Elevator_Pass")));
+            hK.Log("focus: " + (PD.GetBool("canFocus") || PD.GetBool("Focus")));
+            hK.Log("LNail: " + (PD.GetBool("Leftslash") || PD.GetBool("canSideslashLeft")));
+            hK.Log("RNail: " + (PD.GetBool("Rightslash") || PD.GetBool("canSideslashRight")));
+            hK.Log("UNail: " + (PD.GetBool("canUpslash") || PD.GetBool("Upslash")));
+            hK.Log("DNail: " + (PD.GetBool("canDownslash") || PD.GetBool("Downslash")));
+            hK.Log("LDash: " + (PD.GetBool("canDashLeft") || PD.GetBool("Left_Mothwing_Cloak")));
+            hK.Log("RDash: " + (PD.GetBool("canDashRight") || PD.GetBool("Right_Mothwing_Cloak")));
+            hK.Log("LClaw: " + (PD.GetBool("hasWalljumpLeft") || PD.GetBool("Left_Mantis_Claw")));
+            hK.Log("RClaw: " + (PD.GetBool("hasWalljumpRight") || PD.GetBool("Right_Mantis_Claw")));
+            hK.Log("LCDash: " + (PD.GetBool("hasSuperdashLeft") || PD.GetBool("Left_Crystal_Heart")));
+            hK.Log("RCDash: " + (PD.GetBool("hasSuperdashRight") || PD.GetBool("Right_Crystal_Heart")));
+        }
         public void getSwim()
         {
             if (!RandomizeSwim) { SendMessage("swim", "true"); }
-            else { SendMessage("swim", System.Convert.ToString(CheckForItem(@"{Swim}"))); }
+            else { SendMessage("swim", (PlayerData.instance.GetBool("canSwim") || PlayerData.instance.GetBool("Swim")).ToString()); }
         }
 
         public void getEPass()
         {
             if (!RandomizeElevatorPass) { SendMessage("elevatorPass", "true"); }
-            else { SendMessage("elevatorPass", System.Convert.ToString(CheckForItem(@"{Elevator_Pass}"))); }
+            else { SendMessage("elevatorPass", (PlayerData.instance.GetBool("hasElevatorPass") || PlayerData.instance.GetBool("Elevator_Pass")).ToString()); }
         }
 
         public void getFocus()
         {
             
             if (!RandomizeFocus) { SendMessage("canFocus", "true"); }
-            else { SendMessage("canFocus", System.Convert.ToString(CheckForItem(@"{Focus}"))); }
+            else { SendMessage("canFocus", (PlayerData.instance.GetBool("canFocus") || PlayerData.instance.GetBool("Focus")).ToString()); }
         }
 
         public void GetNail()
@@ -190,10 +208,9 @@ namespace HKTracker
             if (!RandomizeNail) { SendMessage("FullNail", "true"); }
             else
             {
-                string[] nail = CheckForItem(@"{Rightslash}", @"{Upslash}", @"{Leftslash}");
-                SendMessage("canSideslashRight", nail[0]);
-                SendMessage("canUpslash", nail[1]);
-                SendMessage("canSideslashLeft", nail[2]);
+                SendMessage("canSideslashRight", (PlayerData.instance.GetBool("Rightslash") || PlayerData.instance.GetBool("canSideslashRight")).ToString());
+                SendMessage("canUpslash", (PlayerData.instance.GetBool("canUpslash") || PlayerData.instance.GetBool("Upslash")).ToString());
+                SendMessage("canSideslashLeft", (PlayerData.instance.GetBool("Leftslash") || PlayerData.instance.GetBool("canSideslashLeft")).ToString());
             }
         }
 
@@ -202,9 +219,8 @@ namespace HKTracker
             if (!RandomizeSplitDash || PlayerData.instance.GetBool("hasDash")) { return; }
             else
             {
-                string[] dash = CheckForItem(@"{Left_Mothwing_Cloak}", @"{Right_Mothwing_Cloak}");
-                SendMessage("canDashLeft", dash[0]);
-                SendMessage("canDashRight", dash[1]);
+                SendMessage("canDashLeft", (PlayerData.instance.GetBool("canDashLeft") || PlayerData.instance.GetBool("Left_Mothwing_Cloak")).ToString());
+                SendMessage("canDashRight", (PlayerData.instance.GetBool("canDashRight") || PlayerData.instance.GetBool("Right_Mothwing_Cloak")).ToString());
             }
         }
 
@@ -213,9 +229,8 @@ namespace HKTracker
             if (!RandomizeSplitClaw || PlayerData.instance.GetBool("hasWalljump")) { return; }
             else
             {
-                string[] claw = CheckForItem(@"{Left_Mantis_Claw}", @"{Right_Mantis_Claw}");
-                SendMessage("hasWalljumpLeft", claw[0]);
-                SendMessage("hasWalljumpRight", claw[1]);
+                SendMessage("hasWalljumpLeft", (PlayerData.instance.GetBool("hasWalljumpLeft") || PlayerData.instance.GetBool("Left_Mantis_Claw")).ToString());
+                SendMessage("hasWalljumpRight", (PlayerData.instance.GetBool("hasWalljumpRight") || PlayerData.instance.GetBool("Right_Mantis_Claw")).ToString());
             }
         }
 
@@ -224,9 +239,8 @@ namespace HKTracker
             if (!RandomizeCDash || PlayerData.instance.GetBool("hasSuperDash")) { return; }
             else
             {
-                string[] cdash = CheckForItem(@"{Right_Crystal_Heart}", @"{Left_Crystal_Heart}");
-                SendMessage("hasSuperdashRight", cdash[0]);
-                SendMessage("hasSuperdashLeft", cdash[1]);
+                SendMessage("hasSuperdashLeft", (PlayerData.instance.GetBool("hasSuperdashLeft") || PlayerData.instance.GetBool("Left_Crystal_Heart")).ToString());
+                SendMessage("hasSuperdashRight", (PlayerData.instance.GetBool("hasSuperdashRight") || PlayerData.instance.GetBool("Right_Crystal_Heart")).ToString());
             }
         }
 
