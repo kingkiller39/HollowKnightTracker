@@ -1546,7 +1546,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasSuperDash" && data["hasSuperdashLeft"] && !data["hasSuperdashRight"]) {
             if (BorderGlowModern()) {
-                console.log("need to do cdash left");
+                $(id).css("filter", "drop-shadow(rgb(7, 100, 50) -7px -1px 2px)")
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1554,7 +1554,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasSuperDash" && !data["hasSuperdashLeft"] && data["hasSuperdashRight"]) {
             if (BorderGlowModern()) {
-                console.log("need to do cdash right");
+                $(id).css("filter", "drop-shadow(rgb(7, 100, 50) 7px 0px 2px)")
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("RightItem");
