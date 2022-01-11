@@ -12,11 +12,11 @@ namespace HKTracker
         public SocketServer()
         {
             IgnoreExtensions = true;
-            randoAtBench = false;
+            RandoAtBench = false;
         }
 
         private static readonly HashSet<string> IntKeysToSend = new HashSet<string> { "simpleKeys", "nailDamage", "maxHealth", "MPReserveMax", "ore", "rancidEggs", "grubsCollected", "charmSlotsFilled", "charmSlots", "flamesCollected", "guardiansDefeated" };
-        private bool randoAtBench { get; set; }
+        private bool RandoAtBench { get; set; }
         public static string seed = "";
         public static bool RandomizeSwim = false;
         public static bool RandomizeElevatorPass = false;
@@ -46,13 +46,13 @@ namespace HKTracker
                 case "json":
                     Send(GetJson());
                     GetRandom();
-                    getSwim();
-                    getEPass();
-                    getFocus();
+                    GetSwim();
+                    GetEPass();
+                    GetFocus();
                     GetNail();
                     GetDash();
                     GetClaw();
-                    getCDash();
+                    GetCDash();
                     break;
                 default:
                     if (e.Data.Contains('|'))
@@ -112,14 +112,12 @@ namespace HKTracker
         {
             if (State != WebSocketState.Open) return;
             HKTracker.Instance.LogDebug("Loaded Save");
-            //GetRandom();
             GetRandoSettings();
             SendMessage("SaveLoaded", "true");
         }
         public void LoadSave()
         {
             if (State != WebSocketState.Open) return;
-            //GetRandom();
             GetRandoSettings();
             SendMessage("SaveLoaded", "true");
         }
@@ -128,15 +126,15 @@ namespace HKTracker
         {
             
             HKTracker.Instance.LogDebug($"EchoBool: {var} = {value}");
-            if (var == "atBench" && value && !randoAtBench)
+            if (var == "atBench" && value && !RandoAtBench)
             {
 
                 LoadSave();
-                randoAtBench = true;
+                RandoAtBench = true;
             }
-            else if (var == "atBench" && !value && randoAtBench)
+            else if (var == "atBench" && !value && RandoAtBench)
             {
-                randoAtBench = false;
+                RandoAtBench = false;
             }
             else if (var.StartsWith("gotCharm_") || var.StartsWith("brokenCharm_") || var.StartsWith("equippedCharm_") || var.StartsWith("can") ||var.StartsWith("has") || var.StartsWith("maskBroken") || var == "overcharmed" || var.StartsWith("used") || var.StartsWith("opened") || var.StartsWith("gave") || var == "unlockedCompletionRate")
             {
@@ -166,37 +164,20 @@ namespace HKTracker
             return json;
         }
 
-        public void CheckPD()
-        {
-            PlayerData PD = PlayerData.instance;
-            HKTracker hK = HKTracker.Instance;
-            hK.Log("swim: " + (PD.GetBool("canSwim") || PD.GetBool("Swim")));
-            hK.Log("epass: " + (PD.GetBool("hasElevatorPass") || PD.GetBool("Elevator_Pass")));
-            hK.Log("focus: " + (PD.GetBool("canFocus") || PD.GetBool("Focus")));
-            hK.Log("LNail: " + (PD.GetBool("Leftslash") || PD.GetBool("canSideslashLeft")));
-            hK.Log("RNail: " + (PD.GetBool("Rightslash") || PD.GetBool("canSideslashRight")));
-            hK.Log("UNail: " + (PD.GetBool("canUpslash") || PD.GetBool("Upslash")));
-            hK.Log("DNail: " + (PD.GetBool("canDownslash") || PD.GetBool("Downslash")));
-            hK.Log("LDash: " + (PD.GetBool("canDashLeft") || PD.GetBool("Left_Mothwing_Cloak")));
-            hK.Log("RDash: " + (PD.GetBool("canDashRight") || PD.GetBool("Right_Mothwing_Cloak")));
-            hK.Log("LClaw: " + (PD.GetBool("hasWalljumpLeft") || PD.GetBool("Left_Mantis_Claw")));
-            hK.Log("RClaw: " + (PD.GetBool("hasWalljumpRight") || PD.GetBool("Right_Mantis_Claw")));
-            hK.Log("LCDash: " + (PD.GetBool("hasSuperdashLeft") || PD.GetBool("Left_Crystal_Heart")));
-            hK.Log("RCDash: " + (PD.GetBool("hasSuperdashRight") || PD.GetBool("Right_Crystal_Heart")));
-        }
-        public void getSwim()
+
+        public void GetSwim()
         {
             if (!RandomizeSwim) { SendMessage("swim", "true"); }
             else { SendMessage("swim", (PlayerData.instance.GetBool("canSwim") || PlayerData.instance.GetBool("Swim")).ToString()); }
         }
 
-        public void getEPass()
+        public void GetEPass()
         {
             if (!RandomizeElevatorPass) { SendMessage("elevatorPass", "true"); }
             else { SendMessage("elevatorPass", (PlayerData.instance.GetBool("hasElevatorPass") || PlayerData.instance.GetBool("Elevator_Pass")).ToString()); }
         }
 
-        public void getFocus()
+        public void GetFocus()
         {
             
             if (!RandomizeFocus) { SendMessage("canFocus", "true"); }
@@ -234,7 +215,7 @@ namespace HKTracker
             }
         }
 
-        public void getCDash()
+        public void GetCDash()
         {
             if (!RandomizeCDash || PlayerData.instance.GetBool("hasSuperDash")) { return; }
             else
@@ -484,7 +465,6 @@ namespace HKTracker
         {
             if (State != WebSocketState.Open) return;
             HKTracker.Instance.LogDebug("Loaded New Save");
-            //GetRandom();
             GetRandoSettings();
             SendMessage("NewSave", "true");
         }
@@ -493,7 +473,6 @@ namespace HKTracker
         {
             orig(self);
             if (State != WebSocketState.Open) return;
-            //GetRandom();
             GetRandoSettings();
             SendMessage("NewSave", "true");
         }

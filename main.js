@@ -68,7 +68,7 @@ $(document).ready(function () {
     try { window.obsstudio.pluginVersion; usingOBS = true; }
     catch (e) { }
     if (usingOBS) {
-        OBS();
+        console.log("Using OBS: Connecting");
     }
 
     var temp = getParameterByName('width');
@@ -342,7 +342,6 @@ $(document).ready(function () {
                 map.containers[currentId].scale = $('#scale').val();
                 $('#' + currentId + ' .itemDiv img').each(function (i, e) {
                     var scale = $('#scale').val();
-                    //$(e).css('zoom', scale + "%");
                     $(e).css("width", (1 + (156 * (scale / 100))) + "px");
                     $(e).css("height", (1 + (156 * (scale / 100))) + "px");
                     $(e).parent().css("width", (1 + (156 * (scale / 100))) + "px");
@@ -410,7 +409,7 @@ $(document).ready(function () {
                 }
             });
             $('#borderGlowToggle').on('change', function () {
-                if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Classic.css") {
+                if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Classic.css") {
                     $(this).prop("checked", true);
                 }
                 if ($(this).is(':checked')) {
@@ -619,8 +618,8 @@ $(document).ready(function () {
 
         div.resizable({
             handles: "n,e,s,w",
-            minWidth: 10, //(div.hasClass('container') ? 164 * (container.scale/100)-30 : 20),
-            minHeight: 10, //(div.hasClass('container') ? 164 * (container.scale/100)-30 : 20),
+            minWidth: 10,
+            minHeight: 10,
             containment: $(document.body),
             stop: function (event, ui) {
                 var id = $(ui.helper).attr('id');
@@ -1165,6 +1164,9 @@ $(document).ready(function () {
                             if ("levelSprites" in item && data[name] - 1 > 0 && data[name] - 1 <= item.levelSprites.length) {
                                 img.attr("src", "images/" + item.levelSprites[data[name] - 1]);
                             }
+                            else if ("levelSprites" in item && (data[name] == 1 || data[name] == 0)) {
+                                img.attr("src", "images/" + item.levelSprites[0]);
+                            }
                             break;
 
                         case "skill":
@@ -1267,7 +1269,7 @@ $(document).ready(function () {
         updateVisible();
     }
     function handleCursedNailv14() {
-        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
+        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Modern.css") {
             document.getElementById("nail").style.filter = "grayscale(0%)";
         }
 
@@ -1325,7 +1327,7 @@ $(document).ready(function () {
     }
 
     function handleCursedNailv15(name, id) {
-        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
+        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Modern.css") {
             document.getElementById("nail").style.filter = "grayscale(0%)";
         }
         if (data["FullNail"] || (data["canDownslash"] && data["canSideslashLeft"] && data["canSideslashRight"] && data["canUpslash"])) { //All slashes
@@ -1589,7 +1591,6 @@ $(document).ready(function () {
                 map.settings.borderColourObtain = "#ffffff";
                 map.settings.borderColourGave = "#FF0000";
             }
-            //$(".itemDiv > img").css("filter", "grayscale(1) brightness(.5)");
             $(".itemDiv > .multiple").css("filter", "");
             $(".selected").css("filter", "drop-shadow(0px 0px 5px #07ff6e)");
             $(".selected").css("filter", "drop-shadow(0px 0px 5px " + map.settings.borderColourEquip + ")");
@@ -1627,7 +1628,7 @@ $(document).ready(function () {
     }
 
     function BorderGlowModern() {
-        return (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css");
+        return (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Modern.css");
     }
 
     function getSubSortKeys(list) {
@@ -1670,8 +1671,3 @@ $(document).ready(function () {
         });
     }
 });
-
-function OBS() {
-    console.log("true");
-    
-}

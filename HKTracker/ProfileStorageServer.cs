@@ -9,11 +9,9 @@ namespace HKTracker
 {
     internal class ProfileStorageServer : WebSocketBehavior
     {
-        private bool isUsingOBS { get; set; }
         public ProfileStorageServer()
         {
             IgnoreExtensions = true;
-            isUsingOBS = false;
         }
         public void Broadcast(string s)
         {
