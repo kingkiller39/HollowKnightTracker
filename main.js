@@ -1188,8 +1188,13 @@ $(document).ready(function () {
                                 setSelected(data[name], id);
                             }
 
-                            if (name == "nailSmithUpgrades") {
-                                if (data["nailSmithUpgrades"] > 0) {
+                            if (name == "simpleKeys" && data["jijiDoorUnlocked"] && data["openedWaterwaysManhole"] && data["godseekerUnlocked"] && data["bathHouseOpened"]) {
+                                setSelected(true, id);
+                                $(id).addClass("gaveItem");
+                            }
+
+                            if (name == "nail") {
+                                if (data["nailSmithUpgrades"] >= 0) {
                                     $("#nail" + '_count').html(data["nailSmithUpgrades"]).show();
                                 }
                                 else {
