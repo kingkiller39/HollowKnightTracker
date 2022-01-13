@@ -53,6 +53,10 @@ namespace HKTracker
                         GetSwim();
                         GetEPass();
                         GetFocus();
+                    GetNail();
+                    GetDash();
+                    GetClaw();
+                    GetCDash();
                     break;
                 default:
                     if (e.Data.Contains('|'))
