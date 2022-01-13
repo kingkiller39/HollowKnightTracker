@@ -409,7 +409,7 @@ $(document).ready(function () {
                 }
             });
             $('#borderGlowToggle').on('change', function () {
-                if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Classic.css") {
+                if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Classic.css") {
                     $(this).prop("checked", true);
                 }
                 if ($(this).is(':checked')) {
@@ -1289,7 +1289,7 @@ $(document).ready(function () {
         updateVisible();
     }
     function handleCursedNailv14() {
-        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Modern.css") {
+        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
             document.getElementById("nail").style.filter = "grayscale(0%)";
         }
 
@@ -1347,7 +1347,7 @@ $(document).ready(function () {
     }
 
     function handleCursedNailv15(name, id) {
-        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Modern.css") {
+        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css") {
             document.getElementById("nail").style.filter = "grayscale(0%)";
         }
         if (data["FullNail"] || (data["canDownslash"] && data["canSideslashLeft"] && data["canSideslashRight"] && data["canUpslash"])) { //All slashes
@@ -1648,7 +1648,7 @@ $(document).ready(function () {
     }
 
     function BorderGlowModern() {
-        return (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/Modern.css");
+        return (map.settings.borderGlow && document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Modern.css");
     }
 
     function getSubSortKeys(list) {
