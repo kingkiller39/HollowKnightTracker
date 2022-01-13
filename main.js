@@ -836,7 +836,7 @@ $(document).ready(function () {
 
                 var json = JSON.parse(received_msg);
                 if (Object.values(json).indexOf("NaN") > -1) {
-                    Send("Exception|" + Object.keys(json)[Object.values(json).indexOf("NaN")])
+                    send("Exception|" + Object.keys(json)[Object.values(json).indexOf("NaN")])
                 }
                 updatePlayerData(json);
             }
