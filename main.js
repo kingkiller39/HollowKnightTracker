@@ -10,6 +10,7 @@ var hasAppliedLS = false;
 var hasAppliedRS = false;
 var OBSProfile = 999;
 var urlParams;
+var ClassicHasEquipped = ".LeftItem, .RightItem, .NailDown, .NailDownLeft, .NailDownUp, .NailDownRight, .NailDownLeftUP, .NailDownLeftRight, .NailDownUpRight, img.equipped, img.multiple, img.selected"
 $(document).ready(function () {
     /*
       var map;	
@@ -387,21 +388,21 @@ $(document).ready(function () {
 
                 updateUrlConfig();
             });
-            $('#borderObtainC').on('change', function () {
+            $('#borderObtainC').on('input', function () {
                 var value = $('#borderObtainC').val();
                 if (/^#[0-9A-F]{6}$/i.test(value)) {
                     map.settings.borderColourObtain = value;
                     updateUrlConfig();
                 }
             });
-            $('#borderGaveC').on('change', function () {
+            $('#borderGaveC').on('input', function () {
                 var value = $('#borderGaveC').val();
                 if (/^#[0-9A-F]{6}$/i.test(value)) {
                     map.settings.borderColourGave = value;
                     updateUrlConfig();
                 }
             });
-            $('#borderEquipC').on('change', function () {
+            $('#borderEquipC').on('input', function () {
                 var value = $('#borderEquipC').val();
                 if (/^#[0-9A-F]{6}$/i.test(value)) {
                     map.settings.borderColourEquip = value;
@@ -1617,6 +1618,23 @@ $(document).ready(function () {
             $(".gaveItem").css("filter", "grayscale(1) brightness(.8) drop-shadow(0px 0px 5px " + map.settings.borderColourGave + ")");
             $(".charmDiv > .selected").css("filter", "grayscale(1) brightness(.5) drop-shadow(0px 0px 5px " + map.settings.borderColourObtain + ")");
             $(".charmDiv > .equipped").css("filter", "drop-shadow(0px 0px 5px " + map.settings.borderColourEquip + ")");
+        }
+        if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Classic.css" && typeof map.settings.borderColourEquip !== null) {
+            var equip = map.settings.borderColourEquip;
+            var gave = map.settings.borderColourGave;
+            $(".LeftItem").css("box-shadow", "-5px 0px 0px 0px " + equip);
+            $(".RightItem").css("box-shadow", "5px 0px 0px 0px " + equip);
+            $(".NailDown").css("box-shadow", "0px 5px 0px -3px " + equip);
+            $(".NailDownLeft").css("box-shadow", "0px 5px 0px -3px " + equip + ", -5px 0px 0px -3px " + equip);
+            $(".NailDownUp").css("box-shadow", "0px 5px 0px -3px " + equip + ", 0px -5px 0px -3px " + equip);
+            $(".NailDownRight").css("box-shadow", "0px 5px 0px -3px " + equip + ", 5px 0px 0px -3px " + equip);
+            $(".NailDownLeftUP").css("box-shadow", "0px 5px 0px -3px " + equip + ", -5px 0px 0px -3px " + equip + ", 0px -5px 0px -3px " + equip);
+            $(".NailDownLeftRight").css("box-shadow", "0px 5px 0px -3px " + equip + ", -5px 0px 0px -3px " + equip + ", 5px 0px 0px -3px " + equip);
+            $(".NailDownUpRight").css("box-shadow", "0px 5px 0px -3px " + equip + ", 0px -5px 0px -3px " + equip + ", 5px 0px 0px -3px " + equip);
+            $(".selected").css("box-shadow", "0px 0px 5px 5px " + equip);
+            $(".equipped").css("box-shadow", "0px 0px 5px 5px " + equip);
+            $(".multiple").css("box-shadow", "0px 0px 5px 5px " + equip);
+            $(".gaveItem").css("box-shadow", "0px 0px 5px 5px " + gave);
         }
     }
 
