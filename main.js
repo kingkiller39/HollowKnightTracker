@@ -1631,7 +1631,7 @@ $(document).ready(function () {
             $(".NailDownLeftUP").css("box-shadow", "0px 5px 0px -3px " + equip + ", -5px 0px 0px -3px " + equip + ", 0px -5px 0px -3px " + equip);
             $(".NailDownLeftRight").css("box-shadow", "0px 5px 0px -3px " + equip + ", -5px 0px 0px -3px " + equip + ", 5px 0px 0px -3px " + equip);
             $(".NailDownUpRight").css("box-shadow", "0px 5px 0px -3px " + equip + ", 0px -5px 0px -3px " + equip + ", 5px 0px 0px -3px " + equip);
-            $(".container > div.itemDiv:not(.charmDiv):not(.LeftItem):not(.RightItem) > img.selected:not(.LeftItem):not(.RightItem)").css("box-shadow", "0px 0px 5px 5px " + equip);
+            $(".container > div.itemDiv:not(.charmDiv):not(.LeftItem):not(.RightItem) > img.selected:not(.LeftItem):not(.RightItem):not(.gaveItem)").css("box-shadow", "0px 0px 5px 5px " + equip);
             $(".charmDiv > .equipped").css("box-shadow", "0px 0px 5px 5px " + equip);
             $(".multiple").css("box-shadow", "0px 0px 5px 5px " + equip);
             $(".gaveItem").css("box-shadow", "0px 0px 5px 5px " + gave + " !important");
