@@ -153,7 +153,7 @@ div.charmDiv > img {
 }
 
 .container > div.itemDiv:not(.charmDiv) >  img.gaveItem {
-	box-shadow: 0px 0px 5px 5px #FF0000 !important;
+	box-shadow: 0px 0px 5px 5px #FF0000;
 }
 
 .misc-container {
