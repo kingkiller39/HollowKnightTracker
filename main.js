@@ -522,9 +522,9 @@ $(document).ready(function () {
             $('#Classic').css("color", "#00FF00");
         }
         if (typeof map.settings.borderColourEquip !== null) {
-            $('#borderObtainC').val() = map.settings.borderColourObtain;
-            $('#borderGaveC').val() = map.settings.borderColourGave;
-            $('#borderEquipC').val() = map.settings.borderColourEquip;
+            $('#borderObtainC').val(map.settings.borderColourObtain);
+            $('#borderGaveC').val(map.settings.borderColourGave);
+            $('#borderEquipC').val(ap.settings.borderColourEquip);
         }
         $.each(map.containers, function (i, container) {
             if (!isEditing && i == "disabled")
