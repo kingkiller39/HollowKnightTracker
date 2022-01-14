@@ -1632,7 +1632,7 @@ $(document).ready(function () {
             $(".NailDownLeftRight").css("box-shadow", "0px 5px 0px -3px " + equip + ", -5px 0px 0px -3px " + equip + ", 5px 0px 0px -3px " + equip);
             $(".NailDownUpRight").css("box-shadow", "0px 5px 0px -3px " + equip + ", 0px -5px 0px -3px " + equip + ", 5px 0px 0px -3px " + equip);
             $(".selected").css("box-shadow", "0px 0px 5px 5px " + equip);
-            $(".equipped").css("box-shadow", "0px 0px 5px 5px " + equip);
+            $(".charmDiv > .equipped").css("box-shadow", "0px 0px 5px 5px " + equip);
             $(".multiple").css("box-shadow", "0px 0px 5px 5px " + equip);
             $(".gaveItem").css("box-shadow", "0px 0px 5px 5px " + gave);
         }
