@@ -513,11 +513,18 @@ $(document).ready(function () {
             return;
         if (map.settings["Style"] != undefined) {
             document.getElementById("pagestyle").setAttribute("href", map.settings["Style"] + ".css");
+            $('#Style div').css("color", "#FFFFFF");
             $('#' + map.settings["Style"]).css("color", "#00FF00");
         }
         else {
             document.getElementById("pagestyle").setAttribute("href", "Classic.css");
+            $('#Style div').css("color", "#FFFFFF");
             $('#Classic').css("color", "#00FF00");
+        }
+        if (typeof map.settings.borderColourEquip !== null) {
+            $('#borderObtainC').val() = map.settings.borderColourObtain;
+            $('#borderGaveC').val() = map.settings.borderColourGave;
+            $('#borderEquipC').val() = map.settings.borderColourEquip;
         }
         $.each(map.containers, function (i, container) {
             if (!isEditing && i == "disabled")
@@ -898,8 +905,10 @@ $(document).ready(function () {
                     } else if (temp[0] == "BorderGlow") {
                         if (temp[1] == "On") {
                             map.settings.borderGlow = true;
+                            $('#borderGlowToggle').prop("checked", true);
                         } else {
                             map.settings.borderGlow = false;
+                            $('#borderGlowToggle').prop("checked", false);
                         }
                         loadDivs();
                         updatePlayerData();
