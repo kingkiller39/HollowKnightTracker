@@ -903,13 +903,13 @@ $(document).ready(function () {
                         getPlayerData();
                         return;
                     } else if (temp[0] == "EquipColor") {
-                        if (temp[1] == "Default") { map.settings.borderColourEquip = "#07ff6e"; }
+                        if (temp[1] == "Default" && typeof map.settings.borderColourEquip == null) { map.settings.borderColourEquip = "#07ff6e"; }
                         else { map.settings.borderColourEquip = temp[1]; }
                         loadDivs();
                         updatePlayerData();
                         return;
                     } else if (temp[0] == "GaveColor") {
-                        if (temp[1] == "Default") { map.settings.borderColourGave = "#FF0000"; }
+                        if (temp[1] == "Default" && typeof map.settings.borderColourGave == null) { map.settings.borderColourGave = "#FF0000"; }
                         else { map.settings.borderColourGave = temp[1]; }
                         loadDivs();
                         updatePlayerData();
