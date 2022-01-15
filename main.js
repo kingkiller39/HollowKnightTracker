@@ -1748,6 +1748,8 @@ $(document).ready(function () {
     }
 
     function RemoveBoxShadow() {
+        $("*").css("box-shadow", "");
+        /*
         $(".LeftItem").css("box-shadow", "");
         $(".RightItem").css("box-shadow", "");
         $(".NailDown").css("box-shadow", "");
@@ -1761,5 +1763,6 @@ $(document).ready(function () {
         $(".charmDiv > .equipped").css("box-shadow", "");
         $(".multiple").css("box-shadow", "");
         $("img.gaveItem").css("box-shadow", "");
+        */
     }
 });
