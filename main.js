@@ -901,6 +901,7 @@ $(document).ready(function () {
                         $('#Style div').css("color", "#FFFFFF");
                         $('#' + temp[1]).css("color", "#00FF00");
                         document.getElementById("pagestyle").setAttribute("href", style + ".css");
+                        if (style == "Modern") { RemoveBoxShadow(); }
                         data = getDefaultData("./datadefault.json");
                         getPlayerData();
                         return;
@@ -1746,3 +1747,19 @@ $(document).ready(function () {
         });
     }
 });
+
+function RemoveBoxShadow() {
+    $(".LeftItem").css("box-shadow", "");
+    $(".RightItem").css("box-shadow", "");
+    $(".NailDown").css("box-shadow", "");
+    $(".NailDownLeft").css("box-shadow", "");
+    $(".NailDownUp").css("box-shadow", "");
+    $(".NailDownRight").css("box-shadow", "");
+    $(".NailDownLeftUP").css("box-shadow", "");
+    $(".NailDownLeftRight").css("box-shadow", "");
+    $(".NailDownUpRight").css("box-shadow", "");
+    $(".container > div.itemDiv:not(.charmDiv):not(.LeftItem):not(.RightItem) > img.selected:not(.LeftItem):not(.RightItem):not(.gaveItem)").css("");
+    $(".charmDiv > .equipped").css("box-shadow", "");
+    $(".multiple").css("box-shadow", "");
+    $("img.gaveItem").css("box-shadow", "");
+}
