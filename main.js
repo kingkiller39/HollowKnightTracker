@@ -1464,7 +1464,7 @@ $(document).ready(function () {
         }
         else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) { //can dash left
             if (BorderGlowModern()) {
-                $(id).css(`drop-shadow(-4px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -4px 0px 3px)`)
+                $(id).css('filter', `drop-shadow(-4px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -4px 0px 3px)`)
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1552,7 +1552,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css(`drop-shadow(-4px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -4px 0px 3px)`)
+                $(id).css('filter', `drop-shadow(-4px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -4px 0px 3px)`);
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
