@@ -1746,20 +1746,20 @@ $(document).ready(function () {
             }
         });
     }
-});
 
-function RemoveBoxShadow() {
-    $(".LeftItem").css("box-shadow", "");
-    $(".RightItem").css("box-shadow", "");
-    $(".NailDown").css("box-shadow", "");
-    $(".NailDownLeft").css("box-shadow", "");
-    $(".NailDownUp").css("box-shadow", "");
-    $(".NailDownRight").css("box-shadow", "");
-    $(".NailDownLeftUP").css("box-shadow", "");
-    $(".NailDownLeftRight").css("box-shadow", "");
-    $(".NailDownUpRight").css("box-shadow", "");
-    $(".container > div.itemDiv:not(.charmDiv):not(.LeftItem):not(.RightItem) > img.selected:not(.LeftItem):not(.RightItem):not(.gaveItem)").css("");
-    $(".charmDiv > .equipped").css("box-shadow", "");
-    $(".multiple").css("box-shadow", "");
-    $("img.gaveItem").css("box-shadow", "");
-}
+    function RemoveBoxShadow() {
+        $(".LeftItem").css("box-shadow", "");
+        $(".RightItem").css("box-shadow", "");
+        $(".NailDown").css("box-shadow", "");
+        $(".NailDownLeft").css("box-shadow", "");
+        $(".NailDownUp").css("box-shadow", "");
+        $(".NailDownRight").css("box-shadow", "");
+        $(".NailDownLeftUP").css("box-shadow", "");
+        $(".NailDownLeftRight").css("box-shadow", "");
+        $(".NailDownUpRight").css("box-shadow", "");
+        $(".container > div.itemDiv:not(.charmDiv):not(.LeftItem):not(.RightItem) > img.selected:not(.LeftItem):not(.RightItem):not(.gaveItem)").css("");
+        $(".charmDiv > .equipped").css("box-shadow", "");
+        $(".multiple").css("box-shadow", "");
+        $("img.gaveItem").css("box-shadow", "");
+    }
+});
