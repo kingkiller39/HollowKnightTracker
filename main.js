@@ -10,6 +10,8 @@ var hasAppliedLS = false;
 var hasAppliedRS = false;
 var OBSProfile = 999;
 var urlParams;
+var profileEquipC;
+var profileGaveC;
 var ClassicHasEquipped = ".LeftItem, .RightItem, .NailDown, .NailDownLeft, .NailDownUp, .NailDownRight, .NailDownLeftUP, .NailDownLeftRight, .NailDownUpRight, img.equipped, img.multiple, img.selected"
 $(document).ready(function () {
     /*
@@ -904,12 +906,14 @@ $(document).ready(function () {
                         return;
                     } else if (temp[0] == "EquipColor") {
                         if (temp[1] == "Default" && typeof map.settings.borderColourEquip == null) { map.settings.borderColourEquip = "#07ff6e"; }
+                        else if (temp[1] == "Default" && typeof map.settings.borderColourEquip !== null) { map.settings.borderColourEquip = profileEquipC; }
                         else { map.settings.borderColourEquip = temp[1]; }
                         loadDivs();
                         updatePlayerData();
                         return;
                     } else if (temp[0] == "GaveColor") {
                         if (temp[1] == "Default" && typeof map.settings.borderColourGave == null) { map.settings.borderColourGave = "#FF0000"; }
+                        else if (temp[1] == "Default" && typeof map.settings.borderColourGave !== null) { map.settings.borderColourGave = profileGaveC; }
                         else { map.settings.borderColourGave = temp[1]; }
                         loadDivs();
                         updatePlayerData();
@@ -979,6 +983,8 @@ $(document).ready(function () {
                 } else if (profileId == temp[0] || OBSProfile == temp[0]) {
                     console.log("Profile ID matches, updating screen");
                     map = JSON.parse(atob(temp[1]));
+                    profileEquipC = map.settings.borderColourEquip;
+                    profileGaveC = map.settings.borderColourGave;
                     loadDivs();
                     updatePlayerData();
                     if (usingOBS && jQuery.isEmptyObject(urlParams)) {
