@@ -330,6 +330,17 @@ $(document).ready(function () {
                 }
             });
 
+            $('#copyOBSUrl').on('click', function () {
+                $('#OBSURL').select();
+                try {
+                    var successful = document.execCommand('copy');
+                    var msg = successful ? 'successful' : 'unsuccessful';
+
+                } catch (err) {
+                    console.log('Oops, unable to copy');
+                }
+            });
+
             $('#copyTinyUrl').on('click', function () {
                 $('#tinyUrlText').select();
                 try {
