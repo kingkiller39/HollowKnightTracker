@@ -1457,13 +1457,14 @@ $(document).ready(function () {
         }
     }
     function doSkillv14(name, id, item) {
+        var result = hexToRgb(map.settings.borderColourEquip);
         if (name == "hasDash" && !data["canDashLeft"] && !data["canDashRight"]) { //no split dash
             setSelected(data[name], id);
             return;
         }
         else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) { //can dash left
             if (BorderGlowModern()) {
-                $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
+                $(id).css(`drop-shadow(-4px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -4px 0px 3px)`)
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1472,7 +1473,7 @@ $(document).ready(function () {
         }
         else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) { //can dash right
             if (BorderGlowModern()) {
-                $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
+                $(id).css('filter', `drop-shadow(3px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 3px 0px 3px`);
 
             } else {
                 $(id).removeClass("container");
@@ -1499,7 +1500,7 @@ $(document).ready(function () {
         else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
                 console.log("applying left claw");
-                $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
+                $(id).css("filter", `drop-shadow(7px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -6px 0px 1px)`);
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1508,7 +1509,7 @@ $(document).ready(function () {
         }
         else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
+                $(id).css("filter", `drop-shadow(-8px 2px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 6px 0px 1px)`);
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("RightItem");
@@ -1538,6 +1539,7 @@ $(document).ready(function () {
 
     }
     function doSkillsv15(name, id, item) {
+        var result = hexToRgb(map.settings.borderColourEquip);
         if (name == "hasDash" && data[name]) {
             if (BorderGlowModern()) {
                 $(id).css("filter", "");
@@ -1550,7 +1552,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
+                $(id).css(`drop-shadow(-4px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -4px 0px 3px)`)
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1558,7 +1560,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
+                $(id).css('filter', `drop-shadow(3px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 3px 0px 3px)`);
 
             } else {
                 $(id).removeClass("container");
@@ -1579,7 +1581,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
+                $(id).css("filter", `drop-shadow(7px 0px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -6px 0px 1px)`);
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1587,7 +1589,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
+                $(id).css("filter", `drop-shadow(-8px 2px 0px black) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 6px 0px 1px)`);
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("RightItem");
@@ -1607,7 +1609,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasSuperDash" && data["hasSuperdashLeft"] && !data["hasSuperdashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(rgb(7, 100, 50) -7px -1px 2px)")
+                $(id).css("filter", `drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) -7px -1px 2px)`);
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1615,7 +1617,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasSuperDash" && !data["hasSuperdashLeft"] && data["hasSuperdashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(rgb(7, 100, 50) 7px 0px 2px)")
+                $(id).css("filter", `drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 7px 0px 2px)`);
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("RightItem");
@@ -1640,6 +1642,7 @@ $(document).ready(function () {
     }
 
     function updateVisible() {
+        var result = hexToRgb(map.settings.borderColourEquip);
         $('.hideIfSet > div.itemDiv:not(:has(>.selected)):not(:has(>.multiple))').hide();
         $('.container:not(.hideIfSet) div.itemDiv').css("display", "block");
         $('.container.hideIfSet div.itemDiv:has(>.selected)').css("display", "block");
@@ -1651,11 +1654,11 @@ $(document).ready(function () {
                 map.settings.borderColourGave = "#FF0000";
             }
             $(".itemDiv > .multiple").css("filter", "");
-            $(".selected").css("filter", "drop-shadow(0px 0px 5px #07ff6e)");
-            $(".selected").css("filter", "drop-shadow(0px 0px 5px " + map.settings.borderColourEquip + ")");
-            $(".gaveItem").css("filter", "grayscale(1) brightness(.8) drop-shadow(0px 0px 5px " + map.settings.borderColourGave + ")");
-            $(".charmDiv > .selected").css("filter", "grayscale(1) brightness(.5) drop-shadow(0px 0px 5px " + map.settings.borderColourObtain + ")");
-            $(".charmDiv > .equipped").css("filter", "drop-shadow(0px 0px 5px " + map.settings.borderColourEquip + ")");
+            $(".selected").css("filter", "drop-shadow(rgb(7, 255, 110) 0px 0px 5px)");
+            $(".selected").css("filter", `drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 0px 0px 5px)`);
+            $(".gaveItem").css("filter", `grayscale(1) brightness(.8) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 0px 0px 5px)`);
+            $(".charmDiv > .selected").css("filter", `grayscale(1) brightness(.5) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 0px 0px 5px)`);
+            $(".charmDiv > .equipped").css("filter", `drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 0px 0px 5px)`);
         }
         if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Classic.css" && typeof map.settings.borderColourEquip !== null) {
             var equip = map.settings.borderColourEquip;
@@ -1745,6 +1748,15 @@ $(document).ready(function () {
                 callback(response.shortLink);
             }
         });
+    }
+
+    function hexToRgb(hex) {
+        var result = /^#?([a-f\d]{2})([a-f\d]{2})([a-f\d]{2})$/i.exec(hex);
+        return result ? {
+            r: parseInt(result[1], 16),
+            g: parseInt(result[2], 16),
+            b: parseInt(result[3], 16)
+        } : null;
     }
 
     function RemoveBoxShadow() {
