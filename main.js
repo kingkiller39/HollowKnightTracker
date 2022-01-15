@@ -1463,7 +1463,7 @@ $(document).ready(function () {
         }
         else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) { //can dash left
             if (BorderGlowModern()) {
-                $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
+                $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(-4px 0px 3px " + map.settings.borderColourEquip + ")");
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1472,7 +1472,7 @@ $(document).ready(function () {
         }
         else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) { //can dash right
             if (BorderGlowModern()) {
-                $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
+                $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(3px 0px 3px " + map.settings.borderColourEquip + ")");
 
             } else {
                 $(id).removeClass("container");
@@ -1499,7 +1499,7 @@ $(document).ready(function () {
         else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
                 console.log("applying left claw");
-                $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
+                $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(-6px 0px 1px " + map.settings.borderColourEquip + ")");
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1508,7 +1508,7 @@ $(document).ready(function () {
         }
         else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
+                $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(6px 0px 1px " + map.settings.borderColourEquip +")");
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("RightItem");
@@ -1550,7 +1550,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasDash" && data["canDashLeft"] && !data["canDashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(rgb(7, 100, 50) -4px 0px 3px)")
+                $(id).css("drop-shadow(-4px 0px 0px black) drop-shadow(-4px 0px 3px " + map.settings.borderColourEquip + ")");
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1558,7 +1558,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasDash" && !data["canDashLeft"] && data["canDashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(rgb(7, 100, 50) 3px 0px 3px");
+                $(id).css('filter', "drop-shadow(3px 0px 0px black) drop-shadow(3px 0px 3px " + map.settings.borderColourEquip + ")");
 
             } else {
                 $(id).removeClass("container");
@@ -1579,7 +1579,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasWalljump" && data["hasWalljumpLeft"] && !data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(rgb(7, 100, 50) -6px 0px 1px)");
+                $(id).css("filter", "drop-shadow(7px 0px 0px black) drop-shadow(-6px 0px 1px " + map.settings.borderColourEquip +")");
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1587,7 +1587,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasWalljump" && !data["hasWalljumpLeft"] && data["hasWalljumpRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(rgb(7, 100, 50) 6px 0px 1px)");
+                $(id).css("filter", "drop-shadow(-8px 2px 0px black) drop-shadow(6px 0px 1px " + map.settings.borderColourEquip +")");
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("RightItem");
@@ -1607,7 +1607,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasSuperDash" && data["hasSuperdashLeft"] && !data["hasSuperdashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(rgb(7, 100, 50) -7px -1px 2px)")
+                $(id).css("filter", "drop-shadow(-7px -1px 2px " + map.settings.borderColourEquip + ")");
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("LeftItem");
@@ -1615,7 +1615,7 @@ $(document).ready(function () {
             return;
         } else if (name == "hasSuperDash" && !data["hasSuperdashLeft"] && data["hasSuperdashRight"]) {
             if (BorderGlowModern()) {
-                $(id).css("filter", "drop-shadow(rgb(7, 100, 50) 7px 0px 2px)")
+                $(id).css("filter", "drop-shadow(7px 0px 2px " + map.settings.borderColourEquip + ")");
             } else {
                 $(id).removeClass("container");
                 $(id).addClass("RightItem");
