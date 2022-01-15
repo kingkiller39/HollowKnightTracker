@@ -309,6 +309,7 @@ $(document).ready(function () {
                 var overrideUrl = getParameterByName("url");
 
                 $('#urlText').val(window.location.href.replace(/\?.*/, "") + "?profile=" + profileId + (overrideUrl != undefined ? "&url=" + overrideUrl : ""));
+                $("#OBSURL").val("https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/");
                 var config = LZString.compressToEncodedURIComponent(JSON.stringify(map));
 
                 toTiny("https://kingkiller39.github.io/HollowKnightRandomizerTracker2.8/index.html?config=" + config, FirebaseApiKey, function (value) {
