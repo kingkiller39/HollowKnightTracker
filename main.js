@@ -902,6 +902,18 @@ $(document).ready(function () {
                         data = getDefaultData("./datadefault.json");
                         getPlayerData();
                         return;
+                    } else if (temp[0] == "EquipColor") {
+                        if (temp[1] == "Default") { map.settings.borderColourEquip = "#07ff6e"; }
+                        else { map.settings.borderColourEquip = temp[1]; }
+                        loadDivs();
+                        updatePlayerData();
+                        return;
+                    } else if (temp[0] == "GaveColor") {
+                        if (temp[1] == "Default") { map.settings.borderColourGave = "#FF0000"; }
+                        else { map.settings.borderColourGave = temp[1]; }
+                        loadDivs();
+                        updatePlayerData();
+                        return;
                     } else if (temp[0] == "BorderGlow") {
                         if (temp[1] == "On") {
                             map.settings.borderGlow = true;
@@ -925,6 +937,8 @@ $(document).ready(function () {
                             if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                                 wsprofile.send("OBSGetStyle");
                                 wsprofile.send("OBSGetGlow");
+                                wsprofile.send("OBSGetEquipC");
+                                wsprofile.send("OBSGetGaveC");
                             }
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Minimal_Left") {
@@ -934,6 +948,8 @@ $(document).ready(function () {
                             if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                                 wsprofile.send("OBSGetStyle");
                                 wsprofile.send("OBSGetGlow");
+                                wsprofile.send("OBSGetEquipC");
+                                wsprofile.send("OBSGetGaveC");
                             }
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Minimal_Right") {
@@ -943,6 +959,8 @@ $(document).ready(function () {
                             if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                                 wsprofile.send("OBSGetStyle");
                                 wsprofile.send("OBSGetGlow");
+                                wsprofile.send("OBSGetEquipC");
+                                wsprofile.send("OBSGetGaveC");
                             }
                             return;
                         } else if (temp[0] == "Preset" && temp[1] == "Rando_Racing") {
@@ -952,6 +970,8 @@ $(document).ready(function () {
                             if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                                 wsprofile.send("OBSGetStyle");
                                 wsprofile.send("OBSGetGlow");
+                                wsprofile.send("OBSGetEquipC");
+                                wsprofile.send("OBSGetGaveC");
                             }
                             return;
                         }else return;
@@ -964,6 +984,8 @@ $(document).ready(function () {
                     if (usingOBS && jQuery.isEmptyObject(urlParams)) {
                         wsprofile.send("OBSGetStyle");
                         wsprofile.send("OBSGetGlow");
+                        wsprofile.send("OBSGetEquipC");
+                        wsprofile.send("OBSGetGaveC");
                     }
                 }
 
