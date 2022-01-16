@@ -1669,9 +1669,9 @@ $(document).ready(function () {
             $(".itemDiv > .multiple").css("filter", "");
             $(".selected").css("filter", "drop-shadow(rgb(7, 255, 110) 0px 0px 5px)");
             $(".selected").css("filter", `drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 0px 0px 5px)`);
-            $(".gaveItem").css("filter", `grayscale(1) brightness(.8) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 0px 0px 5px)`);
+            $(".gaveItem").css("filter", `grayscale(1) brightness(.8) drop-shadow(rgb(${gaveResult.r}, ${gaveResult.g}, ${gaveResult.b}) 0px 0px 5px)`);
             $(".charmDiv > .selected").css("filter", `grayscale(1) brightness(.5) drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 0px 0px 5px)`);
-            $(".charmDiv > .equipped").css("filter", `drop-shadow(rgb(${gaveResult.r}, ${gaveResult.g}, ${gaveResult.b}) 0px 0px 5px)`);
+            $(".charmDiv > .equipped").css("filter", `drop-shadow(rgb(${result.r}, ${result.g}, ${result.b}) 0px 0px 5px)`);
         }
         if (document.getElementById("pagestyle").href == "https://kingkiller39.github.io/HollowKnightTracker/Classic.css" && typeof map.settings.borderColourEquip !== null) {
             var equip = map.settings.borderColourEquip;
